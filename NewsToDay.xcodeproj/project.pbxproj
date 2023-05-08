@@ -111,7 +111,7 @@
 		86E8C5BC2A0911B700059CF4 /* Bookmarks */ = {
 			isa = PBXGroup;
 			children = (
-				86E8C5CD2A09285200059CF4 /* Models */,
+				951C172C2A0974EF00F427F5 /* Models */,
 				86E8C5CC2A09285000059CF4 /* Views */,
 				86E8C5CB2A09284E00059CF4 /* Controllers */,
 			);
@@ -208,13 +208,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		86E8C5CD2A09285200059CF4 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		86E8C5CE2A09285E00059CF4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +289,13 @@
 				86E8C5E22A092CBE00059CF4 /* CategoryViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		951C172C2A0974EF00F427F5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
