@@ -18,6 +18,7 @@
 		86E8C5DA2A0928CC00059CF4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5D92A0928CC00059CF4 /* ProfileViewController.swift */; };
 		86E8C5DD2A092B1700059CF4 /* UIColor+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5DC2A092B1700059CF4 /* UIColor+App.swift */; };
 		86E8C5E32A092CBE00059CF4 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5E22A092CBE00059CF4 /* CategoryViewController.swift */; };
+		954AA5A72A0AC54700918061 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954AA5A62A0AC54700918061 /* ContentCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		86E8C5D92A0928CC00059CF4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		86E8C5DC2A092B1700059CF4 /* UIColor+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+App.swift"; sourceTree = "<group>"; };
 		86E8C5E22A092CBE00059CF4 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		954AA5A62A0AC54700918061 /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				86E8C5B82A0911AB00059CF4 /* Modules */,
-				86E8C5BE2A09135800059CF4 /* Common */,
+				95889F162A0A90AD001057F2 /* Common */,
 				86E8C5DB2A092AFA00059CF4 /* UIConstants */,
 				86E8C5BF2A09139000059CF4 /* Services */,
 				86E8C5C02A0913AD00059CF4 /* Applications */,
@@ -111,7 +113,7 @@
 		86E8C5BC2A0911B700059CF4 /* Bookmarks */ = {
 			isa = PBXGroup;
 			children = (
-				951C172C2A0974EF00F427F5 /* Models */,
+				95889F132A0A56D1001057F2 /* Models */,
 				86E8C5CC2A09285000059CF4 /* Views */,
 				86E8C5CB2A09284E00059CF4 /* Controllers */,
 			);
@@ -126,15 +128,6 @@
 				86E8C5C92A0927C700059CF4 /* Controllers */,
 			);
 			path = Homepage;
-			sourceTree = "<group>";
-		};
-		86E8C5BE2A09135800059CF4 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				86E8C5C22A09141A00059CF4 /* Managers */,
-				86E8C5C32A09142600059CF4 /* Extensions */,
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		86E8C5BF2A09139000059CF4 /* Services */ = {
@@ -155,20 +148,6 @@
 				86E8C5AF2A090ED800059CF4 /* LaunchScreen.storyboard */,
 			);
 			path = Applications;
-			sourceTree = "<group>";
-		};
-		86E8C5C22A09141A00059CF4 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Managers;
-			sourceTree = "<group>";
-		};
-		86E8C5C32A09142600059CF4 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		86E8C5C82A0927B600059CF4 /* Views */ = {
@@ -197,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				86E8C5D72A0928BD00059CF4 /* BookmarksViewController.swift */,
+				954AA5A62A0AC54700918061 /* ContentCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -291,11 +271,35 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		951C172C2A0974EF00F427F5 /* Models */ = {
+		95889F132A0A56D1001057F2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		95889F162A0A90AD001057F2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				95889F172A0A90BE001057F2 /* Managers */,
+				95889F182A0A90CB001057F2 /* Extensions */,
+			);
+			name = Common;
+			path = Common/Common;
+			sourceTree = "<group>";
+		};
+		95889F172A0A90BE001057F2 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		95889F182A0A90CB001057F2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,6 +381,7 @@
 				86E8C5A52A090ED700059CF4 /* AppDelegate.swift in Sources */,
 				86E8C5A72A090ED700059CF4 /* SceneDelegate.swift in Sources */,
 				86E8C5DD2A092B1700059CF4 /* UIColor+App.swift in Sources */,
+				954AA5A72A0AC54700918061 /* ContentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
