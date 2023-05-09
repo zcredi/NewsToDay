@@ -18,10 +18,10 @@ class MainTabBarController: UITabBarController {
     
     private func setupTabBar() {
         tabBar.backgroundColor = .white
-        tabBar.tintColor = .purpleTabBar
-        tabBar.unselectedItemTintColor = .grayTabBar
+        tabBar.tintColor = .purplePrimary
+        tabBar.unselectedItemTintColor = .greyLight
         tabBar.layer.borderWidth = 0.5
-        tabBar.layer.borderColor = UIColor.grayTabBar.cgColor
+        tabBar.layer.borderColor = UIColor.greyLight.cgColor
     }
     
     private func setupItems() {
