@@ -17,8 +17,8 @@ class BookmarksViewController: UIViewController {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Bookmarks"
-        label.textColor = .black //TODO: заменить цвет после объединения веток
-        label.font = UIFont.systemFont(ofSize: 24, weight: .medium) //TODO: заменить шрифт после объединения веток
+        label.textColor = .blackPrimary 
+        label.font = .interSemiBold24()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -26,15 +26,15 @@ class BookmarksViewController: UIViewController {
     let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Saved articles to the library"
-        label.textColor = .gray //TODO: заменить цвет после объединения веток
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium) //TODO: заменить шрифт после объединения веток
+        label.textColor = .greyPrimary
+        label.font = .interRegular16()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let tableSaveContent: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .systemBackground //TODO: заменить цвет после объединения веток
+        tableView.backgroundColor = .systemBackground
         tableView.allowsSelection = true
         tableView.separatorStyle = .none
         tableView.rowHeight = 114
