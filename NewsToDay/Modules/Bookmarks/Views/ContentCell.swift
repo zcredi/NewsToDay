@@ -14,10 +14,9 @@ class ContentCell: UITableViewCell {
     private let contentImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
-        image.backgroundColor = .darkGray
+        image.backgroundColor = .purplePrimary
         image.clipsToBounds = true
         image.layer.cornerRadius = 12
-//        image.image = UIImage(named: "1463044396_l")
         image.tintColor = .label
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
@@ -27,8 +26,8 @@ class ContentCell: UITableViewCell {
     let contentTitle: UILabel = {
         let label = UILabel()
         label.text = "UI/UX Design"
-        label.textColor = .gray //TODO: заменить цвет после объединения веток
-        label.font = UIFont.systemFont(ofSize: 14, weight: .thin) //TODO: заменить шрифт после объединения веток
+        label.textColor = .greyPrimary
+        label.font = .interRegular14()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -37,8 +36,8 @@ class ContentCell: UITableViewCell {
         let label = UILabel()
         label.text = "A Simple Trick For Creating Color Palettes Quickly"
         label.numberOfLines = 2
-        label.textColor = .black //TODO: заменить цвет после объединения веток
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium) //TODO: заменить шрифт после объединения веток
+        label.textColor = .blackPrimary
+        label.font = .interSemiBold16()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
