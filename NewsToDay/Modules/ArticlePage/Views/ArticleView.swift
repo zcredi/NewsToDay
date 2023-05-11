@@ -12,7 +12,8 @@ class ArticleView: UIView {
     enum Constans {
         static let politic = UIImage(named: "politic")
         static let back = "backButton"
-        static let bookmark = "bookmark"
+        static let bookmarkNormal = "bookmark"
+        static let bookmarkSelected = "bookmark.fill"
         static let share = "share"
     }
     // MARK: - imageView
@@ -31,8 +32,10 @@ class ArticleView: UIView {
     // MARK: - bookmarkButton
     private lazy var bookmarkButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setBackgroundImage(UIImage(systemName: Constans.bookmark), for: .normal)
+        button.setBackgroundImage(UIImage(systemName: Constans.bookmarkNormal), for: .normal)
+        button.setBackgroundImage(UIImage(named: Constans.bookmarkSelected), for: .selected)
         button.tintColor = .white
+        button.backgroundColor = UIColor.red
         button.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -126,7 +129,8 @@ class ArticleView: UIView {
         print("backButtonPressed")
     }
     // MARK: - bookmarkButtonPressed
-    @objc private func bookmarkButtonPressed() {
+    @objc private func bookmarkButtonPressed(_ sender: UIButton) {
+//        sender.isSelected = !sender.isSelected
         print("bookmarkButtonPressed")
     }
     // MARK: - shareButtonPressed
