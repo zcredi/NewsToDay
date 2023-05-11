@@ -9,36 +9,38 @@ import UIKit
 import SnapKit
 
 class ArticleView: UIView {
+    enum Constans {
+        static let politic = UIImage(named: "politic")
+        static let back = "backButton"
+        static let bookmark = "bookmark"
+        static let share = "share"
+    }
     // MARK: - imageView
     let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "politic")
-        
+        imageView.image = Constans.politic
         return imageView
     }()
     // MARK: - backButton
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setBackgroundImage(UIImage(named: "backButton"), for: .normal)
+        button.setBackgroundImage(UIImage(named: Constans.back), for: .normal)
         button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
-        
         return button
     }()
     // MARK: - bookmarkButton
     private lazy var bookmarkButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+        button.setBackgroundImage(UIImage(systemName: Constans.bookmark), for: .normal)
         button.tintColor = .white
         button.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
-        
         return button
     }()
     // MARK: - shareButton
     private lazy var shareButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setBackgroundImage(UIImage(named: "share"), for: .normal)
+        button.setBackgroundImage(UIImage(named: Constans.share), for: .normal)
         button.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
-        
         return button
     }()
     // MARK: - themeNewsLabel
@@ -51,7 +53,6 @@ class ArticleView: UIView {
         label.backgroundColor = .purplePrimary
         label.layer.cornerRadius = 16
         label.layer.masksToBounds = true
-        
         return label
     }()
     // MARK: - titleLabel
@@ -64,7 +65,6 @@ class ArticleView: UIView {
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.16
         label.attributedText = NSMutableAttributedString(string: "The latest situation in the presidential election", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
-        
         return label
     }()
     // MARK: - nameAutor
@@ -73,7 +73,6 @@ class ArticleView: UIView {
         label.text = "John Doe"
         label.font = .interSemiBold16()
         label.textColor = .white
-        
         return label
     }()
     // MARK: - autor
@@ -82,7 +81,6 @@ class ArticleView: UIView {
         label.text = "Autor"
         label.font = .interRegular14()
         label.textColor = .greyLight
-        
         return label
     }()
     
@@ -90,7 +88,6 @@ class ArticleView: UIView {
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = true
-        
         return scrollView
     }()
     // MARK: - resultsLabel
@@ -99,7 +96,6 @@ class ArticleView: UIView {
         label.text = "Results"
         label.font = .interSemiBold16()
         label.textColor = .blackPrimary
-        
         return label
     }()
     // MARK: - textLabel
@@ -113,7 +109,6 @@ class ArticleView: UIView {
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.24
         label.attributedText = NSMutableAttributedString(string: "Leads in individual states may change from \none party to another as all the votes are\ncounted. Select a state for detailed results,\nand select the Senate, House or Governor\ntabs to view those races.\n\nFor more detailed state results click on the\n States A-Z links at the bottom of this page.\nResults source: NEP/Edison via Reuters.\nLeads in individual states may change from\n one party to another as all the votes are\ncounted. Select a state for detailed results,\nand select the Senate, House or Governor\n tabs to view those races.\n\nFor more detailed state results click on the\nStates A-Z links at the bottom of this page.\nResults source: NEP/Edison via Reuters.\n\nLeads in individual states may change from\none party to another as all the votes are\ncounted. Select a state for detailed results,\nand select the Senate, House or Governor\ntabs to view those races.\n\nFor more detailed state results click on the\nStates A-Z links at the bottom of this page.\nResults source: NEP/Edison via Reuters.", attributes: [NSAttributedString.Key.paragraphStyle : paragraphStyle])
-
         return label
     }()
     // MARK: - init
@@ -123,7 +118,6 @@ class ArticleView: UIView {
         setupViews()
         setConstrains()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
