@@ -24,6 +24,7 @@
 		86E8C5F12A0A5F7600059CF4 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86E8C5ED2A0A5F7600059CF4 /* Inter-Regular.ttf */; };
 		86E8C5F22A0A5F7600059CF4 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86E8C5EE2A0A5F7600059CF4 /* Inter-Medium.ttf */; };
 		953CD7432A0BF4A8006659A5 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953CD7422A0BF4A8006659A5 /* ContentCell.swift */; };
+		95B1D1FB2A0E474A00702FBB /* BookmarksExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B1D1FA2A0E474A00702FBB /* BookmarksExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		86E8C5ED2A0A5F7600059CF4 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		86E8C5EE2A0A5F7600059CF4 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
 		953CD7422A0BF4A8006659A5 /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
+		95B1D1FA2A0E474A00702FBB /* BookmarksExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				86E8C5C22A09141A00059CF4 /* Managers */,
-				86E8C5C32A09142600059CF4 /* Extensions */,
+				95B1D1F92A0E470D00702FBB /* Extensions */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -175,13 +177,6 @@
 			children = (
 			);
 			path = Managers;
-			sourceTree = "<group>";
-		};
-		86E8C5C32A09142600059CF4 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		86E8C5C82A0927B600059CF4 /* Views */ = {
@@ -324,6 +319,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		95B1D1F92A0E470D00702FBB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				95B1D1FA2A0E474A00702FBB /* BookmarksExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -402,6 +405,7 @@
 				86E8C5DA2A0928CC00059CF4 /* ProfileViewController.swift in Sources */,
 				86E8C5E92A0A5E6B00059CF4 /* UIFont+App.swift in Sources */,
 				86E8C5D82A0928BD00059CF4 /* BookmarksViewController.swift in Sources */,
+				95B1D1FB2A0E474A00702FBB /* BookmarksExtensions.swift in Sources */,
 				86E8C5D52A09289E00059CF4 /* HomepageViewController.swift in Sources */,
 				86E8C5C72A09154400059CF4 /* UITabbarController.swift in Sources */,
 				86E8C5E32A092CBE00059CF4 /* CategoryViewController.swift in Sources */,
