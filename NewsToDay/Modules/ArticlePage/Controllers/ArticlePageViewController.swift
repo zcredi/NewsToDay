@@ -18,8 +18,11 @@ class ArticlePageViewController: UIViewController {
         setupViews()
         setConstrains()
     }
-    
-
+    func activity() {
+        let items:[Any] = ["Text for Share", UIImage(named: "politics")!]
+        let avc = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(avc, animated: true)
+    }
 }
 extension ArticlePageViewController {
     // MARK: - setupViews

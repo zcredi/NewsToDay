@@ -39,7 +39,7 @@ class ArticleView: UIView {
         return button
     }()
     // MARK: - shareButton
-    private lazy var shareButton: UIButton = {
+     lazy var shareButton: UIButton = {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(named: Constans.share), for: .normal)
         button.tintColor = .white
@@ -128,6 +128,7 @@ class ArticleView: UIView {
     }
     // MARK: - backButtonPressed
     @objc private func backButtonPressed() {
+//        dismiss(animated: true)
         print("backButtonPressed")
     }
     // MARK: - bookmarkButtonPressed
@@ -143,8 +144,14 @@ class ArticleView: UIView {
         }
     }
     // MARK: - shareButtonPressed
-    @objc private func shareButtonPressed() {
-        print("shareButtonPressed")
+    @objc func shareButtonPressed(_ sender: UIButton) {
+        let items:[Any] = [URL(string: "https://apple.com")!, UIImage(named: "politic")!]
+        let avc = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        
+        guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
+                return
+            }
+        rootViewController.present(avc, animated: true)
     }
     // MARK: - setupViews
     private func setupViews() {
