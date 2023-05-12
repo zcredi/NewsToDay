@@ -24,18 +24,17 @@ class ArticleView: UIView {
     }()
     // MARK: - backButton
     private lazy var backButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setBackgroundImage(UIImage(named: Constans.back), for: .normal)
+        let button = UIButton()
+        button.setImage(UIImage(named: Constans.back), for: .normal)
+        button.tintColor = .white
         button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         return button
     }()
     // MARK: - bookmarkButton
-    private lazy var bookmarkButton: UIButton = {
+     lazy var bookmarkButton: UIButton = {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(systemName: Constans.bookmarkNormal), for: .normal)
-        button.setBackgroundImage(UIImage(named: Constans.bookmarkSelected), for: .selected)
         button.tintColor = .white
-        button.backgroundColor = UIColor.red
         button.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -43,6 +42,7 @@ class ArticleView: UIView {
     private lazy var shareButton: UIButton = {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(named: Constans.share), for: .normal)
+        button.tintColor = .white
         button.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -114,6 +114,8 @@ class ArticleView: UIView {
         label.attributedText = NSMutableAttributedString(string: "Leads in individual states may change from \none party to another as all the votes are\ncounted. Select a state for detailed results,\nand select the Senate, House or Governor\ntabs to view those races.\n\nFor more detailed state results click on the\n States A-Z links at the bottom of this page.\nResults source: NEP/Edison via Reuters.\nLeads in individual states may change from\n one party to another as all the votes are\ncounted. Select a state for detailed results,\nand select the Senate, House or Governor\n tabs to view those races.\n\nFor more detailed state results click on the\nStates A-Z links at the bottom of this page.\nResults source: NEP/Edison via Reuters.\n\nLeads in individual states may change from\none party to another as all the votes are\ncounted. Select a state for detailed results,\nand select the Senate, House or Governor\ntabs to view those races.\n\nFor more detailed state results click on the\nStates A-Z links at the bottom of this page.\nResults source: NEP/Edison via Reuters.", attributes: [NSAttributedString.Key.paragraphStyle : paragraphStyle])
         return label
     }()
+    // MARK: - let/var
+    var isSelected = false
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -130,8 +132,15 @@ class ArticleView: UIView {
     }
     // MARK: - bookmarkButtonPressed
     @objc private func bookmarkButtonPressed(_ sender: UIButton) {
-//        sender.isSelected = !sender.isSelected
-        print("bookmarkButtonPressed")
+        if isSelected {
+            bookmarkButton.setBackgroundImage(UIImage(systemName: Constans.bookmarkNormal), for: .normal)
+            isSelected = false
+            bookmarkButton.tintColor = .white
+        } else {
+            bookmarkButton.setBackgroundImage(UIImage(systemName: Constans.bookmarkSelected), for: .normal)
+            isSelected = true
+            bookmarkButton.tintColor = .red
+        }
     }
     // MARK: - shareButtonPressed
     @objc private func shareButtonPressed() {
