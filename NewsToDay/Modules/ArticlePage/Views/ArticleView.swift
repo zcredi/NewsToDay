@@ -148,9 +148,7 @@ class ArticleView: UIView {
         let items:[Any] = [URL(string: "https://apple.com")!, UIImage(named: "politic")!]
         let avc = UIActivityViewController(activityItems: items, applicationActivities: nil)
         
-        guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
-                return
-            }
+        guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else { return }
         rootViewController.present(avc, animated: true)
     }
     // MARK: - setupViews
