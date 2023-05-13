@@ -156,7 +156,7 @@ class BookmarksViewController: UIViewController {
         ])
         
     }
-    
+
 }
 
 
