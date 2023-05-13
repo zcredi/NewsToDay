@@ -45,6 +45,10 @@ extension UIColor {
         UIColor(red: 0.401, green: 0.425, blue: 0.559, alpha: 1)
     }
     
+    static var greyDarker: UIColor {
+        UIColor(red: 0.424, green: 0.424, blue: 0.424, alpha: 1)
+    }
+    
     static var greyPrimary: UIColor {
         UIColor(red: 0.488, green: 0.51, blue: 0.632, alpha: 1)
     }
