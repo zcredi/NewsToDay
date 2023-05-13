@@ -27,12 +27,12 @@ class MainTabBarController: UITabBarController {
     private func setupItems() {
         
         let homepage = HomepageViewController()
+        let category = CategoryViewController()
         let bookmarks = BookmarksViewController()
         let profile = ProfileViewController()
-        let category = CategoryViewController()
         
 
-        setViewControllers([homepage, bookmarks, profile, category], animated: true)
+        setViewControllers([homepage, category, bookmarks, profile], animated: true)
         
         guard let items = tabBar.items else { return }
         

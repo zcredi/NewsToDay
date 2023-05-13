@@ -23,6 +23,9 @@
 		86E8C5F02A0A5F7600059CF4 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86E8C5EC2A0A5F7600059CF4 /* Inter-Bold.ttf */; };
 		86E8C5F12A0A5F7600059CF4 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86E8C5ED2A0A5F7600059CF4 /* Inter-Regular.ttf */; };
 		86E8C5F22A0A5F7600059CF4 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86E8C5EE2A0A5F7600059CF4 /* Inter-Medium.ttf */; };
+		86E8C5F42A0A69F900059CF4 /* UILabel+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5F32A0A69F900059CF4 /* UILabel+App.swift */; };
+		86E8C5F62A0A6E8700059CF4 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5F52A0A6E8700059CF4 /* CategoryView.swift */; };
+		86E8C5F92A0A768100059CF4 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5F82A0A768100059CF4 /* CategoryCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		86E8C5EC2A0A5F7600059CF4 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
 		86E8C5ED2A0A5F7600059CF4 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		86E8C5EE2A0A5F7600059CF4 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
+		86E8C5F32A0A69F900059CF4 /* UILabel+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+App.swift"; sourceTree = "<group>"; };
+		86E8C5F52A0A6E8700059CF4 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		86E8C5F82A0A768100059CF4 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,6 +280,7 @@
 			children = (
 				86E8C5DC2A092B1700059CF4 /* UIColor+App.swift */,
 				86E8C5E82A0A5E6B00059CF4 /* UIFont+App.swift */,
+				86E8C5F32A0A69F900059CF4 /* UILabel+App.swift */,
 			);
 			path = UIConstants;
 			sourceTree = "<group>";
@@ -298,6 +305,8 @@
 		86E8C5E02A092C9900059CF4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				86E8C5F72A0A766600059CF4 /* Cell */,
+				86E8C5F52A0A6E8700059CF4 /* CategoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -319,6 +328,14 @@
 				86E8C5EB2A0A5F7600059CF4 /* Inter-SemiBold.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		86E8C5F72A0A766600059CF4 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				86E8C5F82A0A768100059CF4 /* CategoryCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,6 +417,9 @@
 				86E8C5E92A0A5E6B00059CF4 /* UIFont+App.swift in Sources */,
 				86E8C5D82A0928BD00059CF4 /* BookmarksViewController.swift in Sources */,
 				86E8C5D52A09289E00059CF4 /* HomepageViewController.swift in Sources */,
+				86E8C5F92A0A768100059CF4 /* CategoryCollectionViewCell.swift in Sources */,
+				86E8C5F42A0A69F900059CF4 /* UILabel+App.swift in Sources */,
+				86E8C5F62A0A6E8700059CF4 /* CategoryView.swift in Sources */,
 				86E8C5C72A09154400059CF4 /* UITabbarController.swift in Sources */,
 				86E8C5E32A092CBE00059CF4 /* CategoryViewController.swift in Sources */,
 				86E8C5A52A090ED700059CF4 /* AppDelegate.swift in Sources */,
