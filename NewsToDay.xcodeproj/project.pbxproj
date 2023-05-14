@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F249BB42A11038F0045CD3D /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F249BB32A11038F0045CD3D /* LanguageViewController.swift */; };
 		86E8C5A52A090ED700059CF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5A42A090ED700059CF4 /* AppDelegate.swift */; };
 		86E8C5A72A090ED700059CF4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5A62A090ED700059CF4 /* SceneDelegate.swift */; };
 		86E8C5AC2A090ED700059CF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86E8C5AA2A090ED700059CF4 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F249BB32A11038F0045CD3D /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
 		86E8C5A12A090ED700059CF4 /* NewsToDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsToDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86E8C5A42A090ED700059CF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86E8C5A62A090ED700059CF4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F599C952A0D17CB00248DB1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		86E8C5982A090ED700059CF4 = {
 			isa = PBXGroup;
 			children = (
@@ -103,8 +112,8 @@
 		86E8C5BA2A0911B400059CF4 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				0F599C952A0D17CB00248DB1 /* Views */,
 				86E8C5D32A09287200059CF4 /* Models */,
-				86E8C5D22A09287000059CF4 /* Views */,
 				86E8C5D12A09286E00059CF4 /* Controllers */,
 			);
 			path = Profile;
@@ -254,15 +263,9 @@
 			isa = PBXGroup;
 			children = (
 				86E8C5D92A0928CC00059CF4 /* ProfileViewController.swift */,
+				0F249BB32A11038F0045CD3D /* LanguageViewController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		86E8C5D22A09287000059CF4 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		86E8C5D32A09287200059CF4 /* Models */ = {
@@ -407,6 +410,7 @@
 				86E8C5E32A092CBE00059CF4 /* CategoryViewController.swift in Sources */,
 				86E8C5A52A090ED700059CF4 /* AppDelegate.swift in Sources */,
 				953CD7432A0BF4A8006659A5 /* ContentCell.swift in Sources */,
+				0F249BB42A11038F0045CD3D /* LanguageViewController.swift in Sources */,
 				86E8C5A72A090ED700059CF4 /* SceneDelegate.swift in Sources */,
 				86E8C5DD2A092B1700059CF4 /* UIColor+App.swift in Sources */,
 			);

@@ -28,11 +28,12 @@ class MainTabBarController: UITabBarController {
         
         let homepage = HomepageViewController()
         let bookmarks = BookmarksViewController()
-        let profile = ProfileViewController()
         let category = CategoryViewController()
+        let profile = ProfileViewController()
+        
         
 
-        setViewControllers([homepage, bookmarks, profile, category], animated: true)
+        setViewControllers([homepage, category, bookmarks, profile], animated: true)
         
         guard let items = tabBar.items else { return }
         
