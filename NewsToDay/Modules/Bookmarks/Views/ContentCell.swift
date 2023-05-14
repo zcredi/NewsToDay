@@ -22,7 +22,6 @@ class ContentCell: UITableViewCell {
         return image
     }()
     
-
     let contentTitle: UILabel = {
         let label = UILabel()
         label.text = "UI/UX Design"
@@ -52,7 +51,7 @@ class ContentCell: UITableViewCell {
         return subStack
     }()
     
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -72,18 +71,18 @@ class ContentCell: UITableViewCell {
         
         
         NSLayoutConstraint.activate([
-        
+            
             contentImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             contentImage.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
             contentImage.heightAnchor.constraint(equalToConstant: 96),
             contentImage.widthAnchor.constraint(equalToConstant: 96),
-           
+            
             
             verStack.topAnchor.constraint(equalTo: contentImage.topAnchor, constant: 8),
             verStack.leadingAnchor.constraint(equalTo: contentImage.trailingAnchor, constant: 10),
             verStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-
-        
+            
+            
         ])
         
     }
