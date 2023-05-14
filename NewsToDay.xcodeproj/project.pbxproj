@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05BBA97E2A0C163C00861AD0 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA97D2A0C163C00861AD0 /* WelcomeViewController.swift */; };
+		05BBA9832A0C318C00861AD0 /* welcomeImage_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BBA9802A0C318C00861AD0 /* welcomeImage_2.png */; };
+		05BBA9842A0C318C00861AD0 /* welcomeImage_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BBA9812A0C318C00861AD0 /* welcomeImage_1.png */; };
+		05BBA9852A0C318C00861AD0 /* welcomeImage_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BBA9822A0C318C00861AD0 /* welcomeImage_3.png */; };
+		05BBA9872A0C3EE900861AD0 /* pageControlImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BBA9862A0C3EE900861AD0 /* pageControlImage.png */; };
+		05BE1BD72A0FC2FD00379CF0 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BE1BD62A0FC2FD00379CF0 /* SplashScreenViewController.swift */; };
 		86E8C5A52A090ED700059CF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5A42A090ED700059CF4 /* AppDelegate.swift */; };
 		86E8C5A72A090ED700059CF4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5A62A090ED700059CF4 /* SceneDelegate.swift */; };
 		86E8C5AC2A090ED700059CF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86E8C5AA2A090ED700059CF4 /* Main.storyboard */; };
@@ -26,6 +32,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		05BBA97D2A0C163C00861AD0 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		05BBA9802A0C318C00861AD0 /* welcomeImage_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcomeImage_2.png; sourceTree = "<group>"; };
+		05BBA9812A0C318C00861AD0 /* welcomeImage_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcomeImage_1.png; sourceTree = "<group>"; };
+		05BBA9822A0C318C00861AD0 /* welcomeImage_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcomeImage_3.png; sourceTree = "<group>"; };
+		05BBA9862A0C3EE900861AD0 /* pageControlImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pageControlImage.png; sourceTree = "<group>"; };
+		05BE1BD62A0FC2FD00379CF0 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		86E8C5A12A090ED700059CF4 /* NewsToDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsToDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86E8C5A42A090ED700059CF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86E8C5A62A090ED700059CF4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +69,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05BBA97C2A0C147200861AD0 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				05BBA97D2A0C163C00861AD0 /* WelcomeViewController.swift */,
+				05BE1BD62A0FC2FD00379CF0 /* SplashScreenViewController.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		05BBA97F2A0C315F00861AD0 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				05BBA9862A0C3EE900861AD0 /* pageControlImage.png */,
+				05BBA9812A0C318C00861AD0 /* welcomeImage_1.png */,
+				05BBA9802A0C318C00861AD0 /* welcomeImage_2.png */,
+				05BBA9822A0C318C00861AD0 /* welcomeImage_3.png */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		86E8C5982A090ED700059CF4 = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +108,7 @@
 		86E8C5A32A090ED700059CF4 /* NewsToDay */ = {
 			isa = PBXGroup;
 			children = (
+				05BBA97F2A0C315F00861AD0 /* Assets */,
 				86E8C5B82A0911AB00059CF4 /* Modules */,
 				86E8C5BE2A09135800059CF4 /* Common */,
 				86E8C5DB2A092AFA00059CF4 /* UIConstants */,
@@ -89,6 +122,7 @@
 		86E8C5B82A0911AB00059CF4 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				05BBA97C2A0C147200861AD0 /* Welcome */,
 				86E8C5DE2A092C7F00059CF4 /* Category */,
 				86E8C5BD2A0911B900059CF4 /* Homepage */,
 				86E8C5BC2A0911B700059CF4 /* Bookmarks */,
@@ -379,11 +413,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05BBA9872A0C3EE900861AD0 /* pageControlImage.png in Resources */,
 				86E8C5EF2A0A5F7600059CF4 /* Inter-SemiBold.ttf in Resources */,
 				86E8C5F02A0A5F7600059CF4 /* Inter-Bold.ttf in Resources */,
+				05BBA9842A0C318C00861AD0 /* welcomeImage_1.png in Resources */,
 				86E8C5B12A090ED800059CF4 /* LaunchScreen.storyboard in Resources */,
 				86E8C5AE2A090ED800059CF4 /* Assets.xcassets in Resources */,
 				86E8C5F22A0A5F7600059CF4 /* Inter-Medium.ttf in Resources */,
+				05BBA9852A0C318C00861AD0 /* welcomeImage_3.png in Resources */,
+				05BBA9832A0C318C00861AD0 /* welcomeImage_2.png in Resources */,
 				86E8C5F12A0A5F7600059CF4 /* Inter-Regular.ttf in Resources */,
 				86E8C5AC2A090ED700059CF4 /* Main.storyboard in Resources */,
 			);
@@ -397,9 +435,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				86E8C5DA2A0928CC00059CF4 /* ProfileViewController.swift in Sources */,
+				05BBA97E2A0C163C00861AD0 /* WelcomeViewController.swift in Sources */,
 				86E8C5E92A0A5E6B00059CF4 /* UIFont+App.swift in Sources */,
 				86E8C5D82A0928BD00059CF4 /* BookmarksViewController.swift in Sources */,
 				86E8C5D52A09289E00059CF4 /* HomepageViewController.swift in Sources */,
+				05BE1BD72A0FC2FD00379CF0 /* SplashScreenViewController.swift in Sources */,
 				86E8C5C72A09154400059CF4 /* UITabbarController.swift in Sources */,
 				86E8C5E32A092CBE00059CF4 /* CategoryViewController.swift in Sources */,
 				86E8C5A52A090ED700059CF4 /* AppDelegate.swift in Sources */,
