@@ -9,7 +9,6 @@ import UIKit
 
 class BookmarksViewController: UIViewController {
     
-    
     private let value: [Any] = []
     
     //MARK: - UI Components
@@ -90,7 +89,6 @@ class BookmarksViewController: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
         
         tableSaveContent.delegate = self

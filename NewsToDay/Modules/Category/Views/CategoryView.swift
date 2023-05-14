@@ -18,6 +18,9 @@ class CategoryView: UIView {
     
     //MARK: - Create UI
     
+    private lazy var categories: [Category] = []
+    
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -32,6 +35,15 @@ class CategoryView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: Constants.idCategoryCell)
+        
+        APIManager.shared.getCategory { [weak self] values in
+            DispatchQueue.main.async {
+                guard let self else { return }
+                self.categories = values
+                self.collectionView.reloadData()
+            }
+        }
+        
         setupViews()
         setConstraints()
         setDelegates()
@@ -72,13 +84,29 @@ extension CategoryView {
 
 extension CategoryView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        return categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.idCategoryCell, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
         
+        switch categories[indexPath.item] {
+        case .general:
+                cell.categoryButton.setTitle("🔥 General", for: .normal)
+        case .health:
+                cell.categoryButton.setTitle("🫀 Health", for: .normal)
+        case .business:
+                cell.categoryButton.setTitle("💼 Business", for: .normal)
+        case .technology:
+            cell.categoryButton.setTitle("👨‍💻 Technology", for: .normal)
+        case .science:
+            cell.categoryButton.setTitle("🔬 Science", for: .normal)
+        case .entertainment:
+            cell.categoryButton.setTitle("🎮 Gaming", for: .normal)
+        case .sports:
+            cell.categoryButton.setTitle("🏈 Sports", for: .normal)
+            }
         
         return cell
     }
