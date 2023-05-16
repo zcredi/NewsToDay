@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct NewsData: Codable {
+// MARK: - Welcome
+struct Welcome: Codable {
     let status: String
     let totalResults: Int
     let articles: [Article]
@@ -15,7 +16,7 @@ struct NewsData: Codable {
 
 // MARK: - Article
 struct Article: Codable {
-    let resource: Source
+    let resource: Resource
     let author: String?
     let title, description: String
     let url: String

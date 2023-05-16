@@ -36,15 +36,29 @@ class APIManager {
     }
     
     func getNews() {
-        guard let url = URL(string: "\(Constants.baseURL)?\(Constants.countryURL)&apiKey=\(Constants.apiKey)") else { return }
+        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&apiKey=60dd4d0628da48878cad3163d8a74512") else { return }
         let request = URLRequest(url: url)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data else { return }
-            if let article = try? JSONDecoder().decode(Article.self, from: data) {
-                print(article.author as Any)
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let data = data else {
+                print("No data received")
+                return
+            }
+            
+            if let article = try? JSONDecoder().decode(Welcome.self, from: data) {
+                print(article.totalResults)
             } else {
-                print("Fail")
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    print(json)
+                } catch {
+                    print("Failed to decode JSON data: \(error.localizedDescription)")
+                }
             }
         }
         task.resume()
