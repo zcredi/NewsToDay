@@ -18,6 +18,10 @@ extension UIFont {
         return UIFont.init(name: "Inter-Regular", size: 16)
     }
     
+    static func interRegular12() -> UIFont? {
+        return UIFont.init(name: "Inter-Regular", size: 12)
+    }
+    
     //Medium
     static func interMedium14() -> UIFont? {
         return UIFont.init(name: "Inter-Medium", size: 14)
@@ -34,6 +38,10 @@ extension UIFont {
     
     static func interSemiBold16() -> UIFont? {
         return UIFont.init(name: "Inter-SemiBold", size: 16)
+    }
+    
+    static func interSemiBold20() -> UIFont? {
+        return UIFont.init(name: "Inter-SemiBold", size: 20)
     }
     
     static func interSemiBold24() -> UIFont? {
