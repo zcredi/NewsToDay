@@ -20,6 +20,7 @@ class ArticleView: UIView {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = Constans.politic
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     // MARK: - backButton
@@ -63,7 +64,7 @@ class ArticleView: UIView {
         let label = UILabel()
         label.font = .interBold20()
         label.textColor = .white
-        label.numberOfLines = 0
+        label.numberOfLines = 2
         label.lineBreakMode = .byWordWrapping
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.16
@@ -90,7 +91,8 @@ class ArticleView: UIView {
     // MARK: - scrollView
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.showsVerticalScrollIndicator = true
+        scrollView.showsHorizontalScrollIndicator = true
+        scrollView.alwaysBounceVertical = true
         return scrollView
     }()
     // MARK: - resultsLabel
@@ -111,17 +113,41 @@ class ArticleView: UIView {
         label.lineBreakMode = .byWordWrapping
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.24
-        label.attributedText = NSMutableAttributedString(string: "Leads in individual states may change from \none party to another as all the votes are\ncounted. Select a state for detailed results,\nand select the Senate, House or Governor\ntabs to view those races.\n\nFor more detailed state results click on the\n States A-Z links at the bottom of this page.\nResults source: NEP/Edison via Reuters.\nLeads in individual states may change from\n one party to another as all the votes are\ncounted. Select a state for detailed results,\nand select the Senate, House or Governor\n tabs to view those races.\n\nFor more detailed state results click on the\nStates A-Z links at the bottom of this page.\nResults source: NEP/Edison via Reuters.\n\nLeads in individual states may change from\none party to another as all the votes are\ncounted. Select a state for detailed results,\nand select the Senate, House or Governor\ntabs to view those races.\n\nFor more detailed state results click on the\nStates A-Z links at the bottom of this page.\nResults source: NEP/Edison via Reuters.", attributes: [NSAttributedString.Key.paragraphStyle : paragraphStyle])
+        label.attributedText = NSMutableAttributedString(string: "Leads in individual states may change from one party to another as all the votes are counted. Select a state for detailed results, and select the Senate, House or Governor tabs to view those races. For more detailed state results click on the States A-Z links at the bottom of this page. Results source: NEP/Edison via Reuters. Leads in individual states may change from one party to another as all the votes are counted. Select a state for detailed results, and select the Senate, House or Governor tabs to view those races. For more detailed state results click on the States A-Z links at the bottom of this page. Results source: NEP/Edison via Reuters. Leads in individual states may change from one party to another as all the votes are counted. Select a state for detailed results, and select the Senate, House or Governor tabs to view those races. For more detailed state results click on the States A-Z links at the bottom of this page. Results source: NEP/Edison via Reuters.", attributes: [NSAttributedString.Key.paragraphStyle : paragraphStyle])
         return label
     }()
     // MARK: - let/var
     var isSelected = false
+    var articles = [Article]()
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupViews()
         setConstrains()
+        
+        APIManager.shared.getNews() { articles in
+            self.articles = articles
+            if let url = URL(string: articles[1].urlToImage ?? "") {
+                print(url)
+                DispatchQueue.global().async {
+                    if let data = try? Data(contentsOf: url),
+                       let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            self.imageView.image = image
+                        }
+                    }
+                }
+            }
+            DispatchQueue.main.async {
+                self.nameAutor.text = articles[0].author
+                self.titleLabel.text = articles[0].title
+                self.resultsLabel.text = articles[0].source.name
+                self.textLabel.text = articles[0].content
+            }
+            
+        }
+        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -206,7 +232,7 @@ class ArticleView: UIView {
         }
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(imageView.snp.bottom)
-            make.leading.equalTo(safeAreaLayoutGuide.snp.leading)
+            make.leading.equalTo(snp.leading)
             make.trailing.equalTo(safeAreaLayoutGuide.snp.trailing)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
         }
@@ -217,7 +243,7 @@ class ArticleView: UIView {
         textLabel.snp.makeConstraints { make in
             make.top.equalTo(resultsLabel.snp.bottom).inset(-8)
             make.leading.equalTo(scrollView.snp.leading).inset(20)
-            make.trailing.equalTo(scrollView.snp.trailing).inset(-20)
+            make.trailing.equalTo(snp.trailing).inset(20)
             make.bottom.equalTo(scrollView.snp.bottom)
         }
     }

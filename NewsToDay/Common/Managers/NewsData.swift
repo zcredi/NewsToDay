@@ -16,17 +16,18 @@ struct Welcome: Codable {
 
 // MARK: - Article
 struct Article: Codable {
-    let resource: Resource
+    let source: Resource
     let author: String?
-    let title, description: String
-    let url: String
-    let urlToImage: String
-    let publishedAt: Date
+    let title: String?
+    let description: String?
+    let url: String?
+    let urlToImage: String?
+    let publishedAt: String?
     let content: String?
 }
 
 // MARK: - Source
 struct Resource: Codable {
     let id: String?
-    let name: String
+    let name: String?
 }
