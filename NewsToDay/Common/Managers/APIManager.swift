@@ -34,39 +34,8 @@ class APIManager {
         }
         task.resume()
     }
-    
-//    func getNews() {
-//        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&apiKey=60dd4d0628da48878cad3163d8a74512") else { return }
-//        let request = URLRequest(url: url)
-//
-//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-//            if let error = error {
-//                print("Error: \(error.localizedDescription)")
-//                return
-//            }
-//
-//            guard let data = data else {
-//                print("No data received")
-//                return
-//            }
-//
-//            if let news = try? JSONDecoder().decode(Welcome.self, from: data) {
-//                print(news.totalResults)
-//            } else {
-//                do {
-//                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-//                    print(json)
-//                } catch {
-//                    print("Failed to decode JSON data: \(error.localizedDescription)")
-//                }
-//            }
-//        }
-//        task.resume()
-//    }
-    
+        
     func getNews(completion: @escaping ([Article]) -> ()) {
-//    func getNews() {
-        // https://newsapi.org/v2/top-headlines?country=us&apiKey=60dd4d0628da48878cad3163d8a74512
         
         var urlComponent = URLComponents()
         urlComponent.scheme = "https"
@@ -75,8 +44,8 @@ class APIManager {
         
         urlComponent.queryItems = [
             URLQueryItem(name: "country", value: "us"),
+            URLQueryItem(name: "category", value: "business"),
             URLQueryItem(name: "apiKey", value: "60dd4d0628da48878cad3163d8a74512"),
-//            URLQueryItem(name: "pageSize", value: "10")
         ]
         
         if let url = urlComponent.url {
@@ -100,7 +69,6 @@ class APIManager {
                     }
                 }
             }.resume()
-            
         }
     }
 }

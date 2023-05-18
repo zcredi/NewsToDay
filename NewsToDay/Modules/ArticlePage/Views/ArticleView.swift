@@ -125,11 +125,16 @@ class ArticleView: UIView {
         
         setupViews()
         setConstrains()
-        
+        getApi()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    // MARK: - getApi
+    private func getApi() {
         APIManager.shared.getNews() { articles in
             self.articles = articles
             if let url = URL(string: articles[1].urlToImage ?? "") {
-                print(url)
                 DispatchQueue.global().async {
                     if let data = try? Data(contentsOf: url),
                        let image = UIImage(data: data) {
@@ -139,18 +144,14 @@ class ArticleView: UIView {
                     }
                 }
             }
+            
             DispatchQueue.main.async {
                 self.nameAutor.text = articles[0].author
                 self.titleLabel.text = articles[0].title
                 self.resultsLabel.text = articles[0].source.name
                 self.textLabel.text = articles[0].content
             }
-            
         }
-        
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     // MARK: - backButtonPressed
     @objc private func backButtonPressed() {
