@@ -19,9 +19,17 @@ class ArticleView: UIView {
     // MARK: - imageView
     let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Constans.politic
+//        imageView.image = Constans.politic
         imageView.contentMode = .scaleAspectFill
         return imageView
+    }()
+    // MARK: - backgroundView
+    private let backgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0.2
+
+        return view
     }()
     // MARK: - backButton
     private lazy var backButton: UIButton = {
@@ -182,6 +190,7 @@ class ArticleView: UIView {
     private func setupViews() {
         
         addSubview(imageView)
+        addSubview(backgroundView)
         addSubview(backButton)
         addSubview(bookmarkButton)
         addSubview(shareButton)
@@ -199,6 +208,9 @@ class ArticleView: UIView {
         imageView.snp.makeConstraints { make in
             make.trailing.leading.top.equalToSuperview()
             make.height.equalTo(384)
+        }
+        backgroundView.snp.makeConstraints { make in
+            make.edges.equalTo(imageView)
         }
         backButton.snp.makeConstraints { make in
             make.top.equalTo(78)
