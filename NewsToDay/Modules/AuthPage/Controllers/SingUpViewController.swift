@@ -129,6 +129,15 @@ class SingUpViewController: UIViewController {
         
         return button
     }()
+    // MARK: - let/var
+    let profileVC = ProfileViewController()
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setupViews()
+        setConstrains()
+    }
     // MARK: - singUpButtonPressed
     @objc private func singUpButtonPressed() {
         guard let email = emailTextField.text else { return }
@@ -145,7 +154,10 @@ class SingUpViewController: UIViewController {
             if let er = error {
                 self.alertOk(title: "Error", message: "\(er.localizedDescription)")
             } else {
-                let vc = HomepageViewController()
+                self.profileVC.nameLabel.text = self.usernameTextField.text
+                self.profileVC.emailLabel.text = self.emailTextField.text
+                
+                let vc = MainTabBarController()
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)
             }
@@ -156,13 +168,6 @@ class SingUpViewController: UIViewController {
         let vc = SingInViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
-    }
-    // MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        setupViews()
-        setConstrains()
     }
     // MARK: - setupViews
     private func setupViews() {

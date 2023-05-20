@@ -107,7 +107,7 @@ class SingInViewController: UIViewController {
             if let er = error {
                 self.alertOk(title: "Error", message: "\(er.localizedDescription)")
             } else {
-                let vc = HomepageViewController()
+                let vc = MainTabBarController()
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)
             }

@@ -1,4 +1,5 @@
 import UIKit
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
     
@@ -22,21 +23,21 @@ class ProfileViewController: UIViewController {
         return profileFoto
     }()
     
-    var names: [String] = ["Ivan Ivanov", "Petr Petrov", "Anton Antonov", "Oleg Olegov"]
+//    var names: [String] = ["Ivan Ivanov", "Petr Petrov", "Anton Antonov", "Oleg Olegov"]
 
-    private lazy var nameLabel: UILabel = {
+      var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = names.randomElement()
+        label.text = ""
         label.textColor = .blackPrimary
         label.font = .interRegular16()
         return label
     }()
     
-    var emails: [String] = ["sjdnsdkjcn@gmail.com", "dsnfdjks@gmail.com", "sdjfhbsdjh@gmail.com", "dnkcd@gmail.com"]
+//    var emails: [String] = ["sjdnsdkjcn@gmail.com", "dsnfdjks@gmail.com", "sdjfhbsdjh@gmail.com", "dnkcd@gmail.com"]
     
-    private lazy var emailLabel: UILabel = {
+      var emailLabel: UILabel = {
         let label = UILabel()
-        label.text = emails.randomElement()
+        label.text = ""
         label.textColor = .greyPrimary
         label.font = .interRegular14()
         return label
@@ -110,6 +111,15 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func signOutButtonTapped() {
+        do {
+          try Auth.auth().signOut()
+        let vc = SingInViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
+
+        } catch let signOutError as NSError {
+          print("Error signing out: %@", signOutError)
+        }
     }
     
     private func setConstraints() {
