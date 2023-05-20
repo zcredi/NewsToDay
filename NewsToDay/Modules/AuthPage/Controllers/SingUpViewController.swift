@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SingUpViewController: UIViewController {
     enum Constans {
@@ -83,6 +84,7 @@ class SingUpViewController: UIViewController {
         textField.font = .interMedium16()
         textField.layer.cornerRadius = 12
         textField.backgroundColor = .greyLighter
+        textField.isSecureTextEntry = true
         
         return textField
     }()
@@ -101,6 +103,7 @@ class SingUpViewController: UIViewController {
         textField.font = .interMedium16()
         textField.layer.cornerRadius = 12
         textField.backgroundColor = .greyLighter
+        textField.isSecureTextEntry = true
         
         return textField
     }()
@@ -128,9 +131,25 @@ class SingUpViewController: UIViewController {
     }()
     // MARK: - singUpButtonPressed
     @objc private func singUpButtonPressed() {
-        let vc = HomepageViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        guard usernameTextField.text != "" else {
+            alertOk(title: "Error", message: "Type Username")
+            return
+        }
+        guard passwordTextField.text == repeatPasswordTextField.text else {
+            alertOk(title: "Error", message: "Different passwords")
+            return }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if let er = error {
+                self.alertOk(title: "Error", message: "\(er.localizedDescription)")
+            } else {
+                let vc = HomepageViewController()
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+            }
+        }
     }
     // MARK: - textButtonPressed
     @objc private func textButtonPressed() {

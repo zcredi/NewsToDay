@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SingInViewController: UIViewController {
     enum Constans {
@@ -99,9 +100,18 @@ class SingInViewController: UIViewController {
     }
     // MARK: - singInButtonPressed
     @objc private func singInButtonPressed() {
-        let vc = HomepageViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            if let er = error {
+                self.alertOk(title: "Error", message: "\(er.localizedDescription)")
+            } else {
+                let vc = HomepageViewController()
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+            }
+        }
     }
     // MARK: - textButtonPressed
     @objc private func textButtonPressed() {
