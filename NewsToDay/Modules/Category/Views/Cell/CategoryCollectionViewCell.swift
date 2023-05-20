@@ -14,10 +14,10 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Create UI
     
-    private lazy var categoryButton: UIButton = {
+    public lazy var categoryButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .greyLighter
-        button.setTitle("🏈 Sports", for: .normal)
+        button.setTitle("", for: .normal)
         button.setTitleColor(.greyDark, for: .normal)
         button.titleLabel?.font = .interSemiBold16()
         button.layer.cornerRadius = 12
