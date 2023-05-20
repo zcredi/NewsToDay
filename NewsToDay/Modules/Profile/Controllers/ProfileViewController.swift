@@ -1,126 +1,148 @@
-//
-//  ProfileViewController.swift
-//  NewsToDay
-//
-//  Created by Владислав on 08.05.2023.
-//
-
 import UIKit
 
 class ProfileViewController: UIViewController {
-    let profileTitle = UILabel()
-    let profileFotoView = UIImageView(image: UIImage(named: "profileFoto"))
-    let nameLabel = UILabel()
-    let emailLabel = UILabel()
-    let languageButton = UIButton(type: .system)
-    let termsAndConditionsButton = UIButton(type: .system)
-    let signOutButton = UIButton(type: .system)
     
-    private func setupUI() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.hidesBackButton = true
+    }
+    
+    private lazy var profileLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Profile"
+        label.textColor = .blackPrimary
+        label.font = .interSemiBold24()
+        return label
+    }()
+    
+    private lazy var profileFotoImageView: UIImageView = {
+        let profileFoto = UIImageView()
+        profileFoto.image = UIImage(named: "profileFoto")
+        profileFoto.contentMode = .scaleToFill
+        return profileFoto
+    }()
+    
+    var names: [String] = ["Ivan Ivanov", "Petr Petrov", "Anton Antonov", "Oleg Olegov"]
+
+    private lazy var nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = names.randomElement()
+        label.textColor = .blackPrimary
+        label.font = .interRegular16()
+        return label
+    }()
+    
+    var emails: [String] = ["sjdnsdkjcn@gmail.com", "dsnfdjks@gmail.com", "sdjfhbsdjh@gmail.com", "dnkcd@gmail.com"]
+    
+    private lazy var emailLabel: UILabel = {
+        let label = UILabel()
+        label.text = emails.randomElement()
+        label.textColor = .greyPrimary
+        label.font = .interRegular14()
+        return label
+    }()
+    
+    private lazy var languageButton: UIButton = {
+        let button = UIButton()
+        button.configuration = .filled()
+        button.configuration?.title = "Language"
+        button.configuration?.baseForegroundColor = .greyDark
+        button.configuration?.baseBackgroundColor = .greyLighter
+        button.configuration?.image = UIImage(named: "forward")
+        button.configuration?.imagePadding = 200
+        button.configuration?.imagePlacement = .trailing
+        button.addTarget(self, action: #selector(languageButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var signOutButton: UIButton = {
+        let button = UIButton()
+        button.configuration = .filled()
+        button.configuration?.title = "Sign Out"
+        button.configuration?.baseForegroundColor = .greyDark
+        button.configuration?.baseBackgroundColor = .greyLighter
+        button.configuration?.image = UIImage(named: "signOut")
+        button.configuration?.imagePadding = 200
+        button.configuration?.imagePlacement = .trailing
+        button.addTarget(self, action: #selector(signOutButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var termsAndConditionsButton: UIButton = {
+        let button = UIButton()
+        button.configuration = .filled()
+        button.configuration?.title = "Terms & Conditions"
+        button.configuration?.baseForegroundColor = .greyDark
+        button.configuration?.baseBackgroundColor = .greyLighter
+        button.configuration?.image = UIImage(named: "forward")
+        button.configuration?.imagePadding = 130
+        button.configuration?.imagePlacement = .trailing
+        
+        button.addTarget(self, action: #selector(termsAndConditionsButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        setupProfileTitle()
-        setupProfileFotoView()
-        setupNameLabel()
-        //setupEmailLabel()
-        setupLanguageButton()
-        setupsignOutButton()
-        setupTermsAndConditionsButton()
+        setupViews()
+        setConstraints()
     }
     
-    func setupProfileTitle() {
-        view.addSubview(profileTitle)
-        profileTitle.translatesAutoresizingMaskIntoConstraints = false
-        profileTitle.text = "Profile"
-        profileTitle.textColor = .blackPrimary
-        profileTitle.font = .interBold24()
-        NSLayoutConstraint.activate([
-            profileTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 72),
-            profileTitle.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
-            
-        ])
-    }
-    
-    func setupProfileFotoView() {
-        view.addSubview(profileFotoView)
-        profileFotoView.translatesAutoresizingMaskIntoConstraints = false
-        profileFotoView.contentMode = .scaleToFill
-        NSLayoutConstraint.activate([
-            profileFotoView.topAnchor.constraint(equalTo: profileTitle.bottomAnchor, constant: 32),
-            profileFotoView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            profileFotoView.widthAnchor.constraint(equalToConstant: 72),
-            profileTitle.heightAnchor.constraint(equalToConstant: 72)
-        ])
-    }
-    
-    func setupNameLabel() {
+    private func setupViews() {
+        view.addSubview(profileLabel)
+        view.addSubview(profileFotoImageView)
         view.addSubview(nameLabel)
-        nameLabel.text = "Dev P"
-        nameLabel.textColor = .blackPrimary
-        nameLabel.font = .interBold16()
+        view.addSubview(emailLabel)
+        view.addSubview(languageButton)
+        view.addSubview(termsAndConditionsButton)
+        view.addSubview(signOutButton)
+    }
+    
+    @objc func languageButtonTapped() {
+        let teamVC = LanguageViewController()
+        self.navigationController?.pushViewController(teamVC, animated: true)
+    }
+    
+    @objc func termsAndConditionsButtonTapped() {
+        let teamVC = TermsViewController()
+        self.navigationController?.pushViewController(teamVC, animated: true)
+    }
+    
+    @objc func signOutButtonTapped() {
+    }
+    
+    private func setConstraints() {
+        
+        profileLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            profileLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 72),
+            profileLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
+        ])
+        profileFotoImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            profileFotoImageView.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 32),
+            profileFotoImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            profileFotoImageView.widthAnchor.constraint(equalToConstant: 72),
+            profileFotoImageView.heightAnchor.constraint(equalToConstant: 72)
+        ])
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: profileTitle.bottomAnchor, constant: 44),
-            nameLabel.leadingAnchor.constraint(equalTo: profileFotoView.trailingAnchor, constant: 24)
+            nameLabel.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 44),
+            nameLabel.leadingAnchor.constraint(equalTo: profileFotoImageView.trailingAnchor, constant: 24)
         ])
-    }
-    
-    func setupEmailLabel() {
-        view.addSubview(emailLabel)
-        nameLabel.text = "dev@gmail.com"
-        nameLabel.textColor = .greyPrimary
-        emailLabel.font = .interRegular16()
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             emailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 0),
-            emailLabel.leadingAnchor.constraint(equalTo: profileFotoView.trailingAnchor, constant: 24)
+            emailLabel.leadingAnchor.constraint(equalTo: profileFotoImageView.trailingAnchor, constant: 24)
         ])
-    }
-    
-    func setupLanguageButton() {
-        view.addSubview(languageButton)
-        languageButton.layer.cornerRadius = 12
-        languageButton.backgroundColor = .greyLighter
-        languageButton.setTitle("Language", for: .normal)
-        languageButton.setTitleColor(.greyDark, for: .normal)
-        languageButton.titleLabel?.font = .interSemiBold16()
         languageButton.translatesAutoresizingMaskIntoConstraints = false
-        languageButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         NSLayoutConstraint.activate([
-            languageButton.topAnchor.constraint(equalTo: profileFotoView.bottomAnchor, constant: 44),
+            languageButton.topAnchor.constraint(equalTo: profileFotoImageView.bottomAnchor, constant: 44),
+            languageButton.heightAnchor.constraint(equalToConstant: 56),
             languageButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            languageButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -19),
-            languageButton.heightAnchor.constraint(equalToConstant: 56)
-        ])
-    }
-    
-    @objc func buttonTapped() {
-            let LanguageViewController = LanguageViewController() // Создаем экземпляр ViewControllerB
-            navigationController?.pushViewController(LanguageViewController, animated: true) // Вызываем переход
-        }
-    
-    func setupTermsAndConditionsButton() {
-        view.addSubview(termsAndConditionsButton)
-        termsAndConditionsButton.layer.cornerRadius = 12
-        termsAndConditionsButton.backgroundColor = .greyLighter
-        termsAndConditionsButton.setTitle("Terms & Conditions", for: .normal)
-        termsAndConditionsButton.setTitleColor(.greyDark, for: .normal)
-        termsAndConditionsButton.titleLabel?.font = .interSemiBold16()
-        termsAndConditionsButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            termsAndConditionsButton.bottomAnchor.constraint(equalTo: signOutButton.topAnchor, constant: -28),
-            termsAndConditionsButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            termsAndConditionsButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -19),
-            termsAndConditionsButton.heightAnchor.constraint(equalToConstant: 56)
-        ])
-    }
-    
-    func setupsignOutButton() {
-        view.addSubview(signOutButton)
-        signOutButton.layer.cornerRadius = 12
-        signOutButton.backgroundColor = .greyLighter
-        signOutButton.setTitle("Sign Out", for: .normal)
-        signOutButton.setTitleColor(.greyDark, for: .normal)
-        signOutButton.titleLabel?.font = .interSemiBold16()
+            languageButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -19)
+            ])
         signOutButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             signOutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -28),
@@ -128,11 +150,12 @@ class ProfileViewController: UIViewController {
             signOutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -19),
             signOutButton.heightAnchor.constraint(equalToConstant: 56)
         ])
-    }
-
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
+        termsAndConditionsButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            termsAndConditionsButton.bottomAnchor.constraint(equalTo: signOutButton.topAnchor, constant: -28),
+            termsAndConditionsButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            termsAndConditionsButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -19),
+            termsAndConditionsButton.heightAnchor.constraint(equalToConstant: 56)
+        ])
     }
 }

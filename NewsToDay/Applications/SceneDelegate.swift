@@ -18,6 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = MainTabBarController()
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .unspecified
+        
+        let mainVC = ProfileViewController()
+        let navController = NavController(rootViewController: mainVC)
+        window?.rootViewController = navController
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

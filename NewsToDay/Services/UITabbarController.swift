@@ -29,7 +29,6 @@ class MainTabBarController: UITabBarController {
         let homepage = HomepageViewController()
         let category = CategoryViewController()
         let bookmarks = BookmarksViewController()
-        let category = CategoryViewController()
         let profile = ProfileViewController()
         
         
