@@ -154,8 +154,8 @@ class SingUpViewController: UIViewController {
             if let er = error {
                 self.alertOk(title: "Error", message: "\(er.localizedDescription)")
             } else {
-                self.profileVC.nameLabel.text = self.usernameTextField.text
-                self.profileVC.emailLabel.text = self.emailTextField.text
+                ProfileViewController.name = self.usernameTextField.text ?? ""
+                ProfileViewController.email = self.emailTextField.text ?? ""
                 
                 let vc = MainTabBarController()
                 vc.modalPresentationStyle = .fullScreen

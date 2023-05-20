@@ -3,6 +3,9 @@ import FirebaseAuth
 
 class ProfileViewController: UIViewController {
     
+    static var name = ""
+    static var email = ""
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.hidesBackButton = true
@@ -27,7 +30,7 @@ class ProfileViewController: UIViewController {
 
       var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = ""
+        label.text = name
         label.textColor = .blackPrimary
         label.font = .interRegular16()
         return label
@@ -37,7 +40,7 @@ class ProfileViewController: UIViewController {
     
       var emailLabel: UILabel = {
         let label = UILabel()
-        label.text = ""
+        label.text = email
         label.textColor = .greyPrimary
         label.font = .interRegular14()
         return label
