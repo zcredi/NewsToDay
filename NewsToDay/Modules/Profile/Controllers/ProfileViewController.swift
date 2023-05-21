@@ -1,6 +1,10 @@
 import UIKit
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
+    
+    static var name = ""
+    static var email = ""
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -22,21 +26,21 @@ class ProfileViewController: UIViewController {
         return profileFoto
     }()
     
-    var names: [String] = ["Ivan Ivanov", "Petr Petrov", "Anton Antonov", "Oleg Olegov"]
+//    var names: [String] = ["Ivan Ivanov", "Petr Petrov", "Anton Antonov", "Oleg Olegov"]
 
-    private lazy var nameLabel: UILabel = {
+      var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = names.randomElement()
+        label.text = name
         label.textColor = .blackPrimary
         label.font = .interRegular16()
         return label
     }()
     
-    var emails: [String] = ["sjdnsdkjcn@gmail.com", "dsnfdjks@gmail.com", "sdjfhbsdjh@gmail.com", "dnkcd@gmail.com"]
+//    var emails: [String] = ["sjdnsdkjcn@gmail.com", "dsnfdjks@gmail.com", "sdjfhbsdjh@gmail.com", "dnkcd@gmail.com"]
     
-    private lazy var emailLabel: UILabel = {
+      var emailLabel: UILabel = {
         let label = UILabel()
-        label.text = emails.randomElement()
+        label.text = email
         label.textColor = .greyPrimary
         label.font = .interRegular14()
         return label
@@ -88,6 +92,13 @@ class ProfileViewController: UIViewController {
         setupViews()
         setConstraints()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        let fifthViewController = ProfileViewController()
+//        navigationController?.pushViewController(fifthViewController, animated: true)
+    }
+
     
     private func setupViews() {
         view.addSubview(profileLabel)
@@ -100,16 +111,24 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func languageButtonTapped() {
-        let teamVC = LanguageViewController()
-        self.navigationController?.pushViewController(teamVC, animated: true)
+        let navBar = UINavigationController(rootViewController: LanguageViewController())
+        present(navBar, animated: true)
     }
-    
     @objc func termsAndConditionsButtonTapped() {
-        let teamVC = TermsViewController()
-        self.navigationController?.pushViewController(teamVC, animated: true)
+        let navBar = UINavigationController(rootViewController: TermsViewController())
+        present(navBar, animated: true)
     }
     
     @objc func signOutButtonTapped() {
+        do {
+          try Auth.auth().signOut()
+        let vc = SingInViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
+
+        } catch let signOutError as NSError {
+          print("Error signing out: %@", signOutError)
+        }
     }
     
     private func setConstraints() {
