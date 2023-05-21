@@ -15,6 +15,8 @@ class HomepageViewController: UIViewController, CollectionDidSelectProtocol {
     private var recommendedTableView = RecommendedTableView()
     private var recommendedView = RecommendedView()
     
+    var tableView = UITableView()
+    var filteredResults: [Result] = []
     
     private let titleLabel: UILabel = {
         let view = UILabel()
@@ -36,7 +38,7 @@ class HomepageViewController: UIViewController, CollectionDidSelectProtocol {
         return view
     }()
     
-    lazy var searchBar: UISearchBar = {
+     var searchBar: UISearchBar = {
         let view = UISearchBar()
         view.placeholder = "Search"
         view.searchTextField.font = UIFont.interMedium16()
@@ -55,6 +57,7 @@ class HomepageViewController: UIViewController, CollectionDidSelectProtocol {
         view.backgroundColor = .white
         setupCategoriesCollection()
         setupUI()
+        configureTable()
         
         navigationController?.navigationBar.prefersLargeTitles = true
         getNewsFromCategory(categoryName: Category.allCases.randomElement()?.rawValue ?? "")
@@ -64,6 +67,7 @@ class HomepageViewController: UIViewController, CollectionDidSelectProtocol {
         categoriesCollection.delegateCollectionDidSelect = self
         middleCollectionView.delegateNewsCollectionView = self
         recommendedTableView.delegateRecommendedTableView = self
+        searchBar.delegate = self
         let vc = tabBarController?.viewControllers?.first(where: { $0 is CategoryViewController }) as? CategoryViewController
         vc?.delegateCategory = self
         categoriesCollection.translatesAutoresizingMaskIntoConstraints = false
@@ -72,10 +76,21 @@ class HomepageViewController: UIViewController, CollectionDidSelectProtocol {
         recommendedView.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    func configureTable() {
+        tableView.rowHeight = 100
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(RecommendedCell.self, forCellReuseIdentifier: RecommendedCell.identifier)
+//        tableView.dataSource = self
+//        tableView.delegate = self
+    }
+    
     private func setupUI() {
         view.addSubview(titleLabel)
         view.addSubview(subtitleLabel)
         view.addSubview(searchBar)
+        view.addSubview(tableView)
         view.addSubview(categoriesCollection)
         view.addSubview(middleCollectionView)
         view.addSubview(recommendedTableView)
@@ -114,6 +129,11 @@ class HomepageViewController: UIViewController, CollectionDidSelectProtocol {
             recommendedTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             recommendedTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+        
+//        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+//        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+//        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+//        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     func getNewsFromCategory(categoryName: String) {
@@ -214,3 +234,42 @@ extension HomepageViewController: RecommendedTableViewDelegate {
         present(vc, animated: true)
     }
 }
+
+
+extension HomepageViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+        for item in filteredResults {
+            let text = searchText.lowercased()
+            let isArrayContain = item.title!
+
+            if isArrayContain != nil {
+                print("Search Complete")
+                filteredResults.append(item)
+            }
+        }
+        print(filteredResults)
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+//        filteredResults = results
+        tableView.reloadData()
+    }
+}
+
+//extension HomepageViewController: UITableViewDelegate, UITableViewDataSource {
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 5
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as? SearchTableViewCell else {
+//            return UITableViewCell()
+//        }
+//
+//        return cell
+//    }
+//}
