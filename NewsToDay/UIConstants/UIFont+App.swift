@@ -36,6 +36,10 @@ extension UIFont {
         return UIFont.init(name: "Inter-SemiBold", size: 12)
     }
     
+    static func interSemiBold14() -> UIFont? {
+        return UIFont.init(name: "Inter-SemiBold", size: 14)
+    }
+    
     static func interSemiBold16() -> UIFont? {
         return UIFont.init(name: "Inter-SemiBold", size: 16)
     }

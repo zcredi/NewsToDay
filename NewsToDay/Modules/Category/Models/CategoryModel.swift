@@ -14,10 +14,11 @@ struct CategoryModel: Codable {
 
 // MARK: - Source
 struct Source: Codable {
-    let category: Category
+    let id: String
+    let category: String
 }
 
-enum Category: String, Codable {
+enum Category: String, Codable, CaseIterable {
     case business = "business"
     case entertainment = "entertainment"
     case general = "general"

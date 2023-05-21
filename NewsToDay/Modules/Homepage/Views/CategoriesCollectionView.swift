@@ -16,7 +16,11 @@ class CategoriesCollectionView: UIView, UICollectionViewDelegate, UICollectionVi
     private var collectionView: UICollectionView!
     weak var delegateCollectionDidSelect: CollectionDidSelectProtocol?
     
-    private var categories = ["Random", "Politics", "Business", "Top", "Environment", "Entertainment", "Food", "Health", "Science", "Sports", "Tourism", "Technology", "World"]
+    private var categories: [String] = {
+        var category = ["Random"]
+        category.append(contentsOf: Category.allCases.map( { $0.rawValue }))
+        return category
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -71,8 +75,27 @@ class CategoriesCollectionView: UIView, UICollectionViewDelegate, UICollectionVi
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else {
             return UICollectionViewCell()
         }
-        let category = categories[indexPath.row]
-        cell.configure(with: category)
+
+        
+        switch categories[indexPath.item] {
+        case "general":
+            cell.categoryLabel.text = "🔥 General"
+        case "health":
+            cell.categoryLabel.text = "🫀 Health"
+        case "business":
+            cell.categoryLabel.text = "💼 Business"
+        case "technology":
+            cell.categoryLabel.text = "👨‍💻 Technology"
+        case "science":
+            cell.categoryLabel.text = "🔬 Science"
+        case "entertainment":
+            cell.categoryLabel.text = "🎮 Gaming"
+        case "sports":
+            cell.categoryLabel.text = "🏈 Sports"
+        default:
+            cell.categoryLabel.text = "Random"
+        }
+        
         return cell
     }
     
@@ -83,6 +106,11 @@ class CategoriesCollectionView: UIView, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegateCollectionDidSelect?.getNewsFromCategory(categoryName: categories[indexPath.item])
+        
+        var category = categories[indexPath.item]
+        if category == "Random" {
+            category = categories.randomElement() ?? "Random"
+        }
+        delegateCollectionDidSelect?.getNewsFromCategory(categoryName: category)
     }
 }
