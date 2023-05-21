@@ -14,12 +14,23 @@ class APIManager {
     enum Constants {
         static let baseURL = "https://newsapi.org/v2/top-headlines"
         static let sources = "sources?"
-        static let countryURL = "country=us"
-        static let apiKey = "60dd4d0628da48878cad3163d8a74512"
+        static let category = "category="
+        static let apiKey = "cff8c0ee67d64a69a5a99c17c7075c13"
     }
     
-    func getCategory(completion: @escaping ([Category]) -> Void) {
+    enum Category: String, CaseIterable {
+        case business = "business"
+        case entertainment = "entertainment"
+        case general = "general"
+        case health = "health"
+        case science = "science"
+        case sports = "sports"
+        case technology = "technology"
+    }
+    
+    func getCategory(completion: @escaping ([String]) -> Void) {
         guard let url = URL(string: "\(Constants.baseURL)/\(Constants.sources)&apiKey=\(Constants.apiKey)") else { return }
+        print(url)
         let request = URLRequest(url: url)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -35,31 +46,77 @@ class APIManager {
         task.resume()
     }
     
-    func getNews() {
-        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&apiKey=60dd4d0628da48878cad3163d8a74512") else { return }
+    func getNews(category: Category, completion: @escaping ([Article]) -> ()) {
+            
+            var urlComponent = URLComponents()
+            urlComponent.scheme = "https"
+            urlComponent.host = "newsapi.org"
+            urlComponent.path = "/v2/top-headlines"
+            
+            urlComponent.queryItems = [
+                URLQueryItem(name: "country", value: "us"),
+                URLQueryItem(name: "category", value: "\(category.rawValue)"),
+                URLQueryItem(name: "apiKey", value: "60dd4d0628da48878cad3163d8a74512"),
+            ]
+            
+            if let url = urlComponent.url {
+                var request = URLRequest(url: url)
+                request.httpMethod = "GET"
+                
+                URLSession.shared.dataTask(with: request) { data, response, error in
+                    guard error == nil else {
+                        print(error!.localizedDescription)
+                        return
+                    }
+                    
+                    if let safeData = data {
+                        
+                        do {
+                            let newsResponse = try JSONDecoder().decode(ArticleData.self, from: safeData)
+                           completion(newsResponse.articles)
+                        } catch let error {
+                            print(error.localizedDescription)
+                            return
+                        }
+                    }
+                }.resume()
+            }
+        }
+//https://newsapi.org/v2/top-headlines?category=business&apiKey=60dd4d0628da48878cad3163d8a74512
+    
+    func getAll(category: String, completion: @escaping ([Article]) -> Void) {
+        guard let url = URL(string: "\(Constants.baseURL)?\(Constants.category)\(category)&apiKey=\(Constants.apiKey)") else { return }
         let request = URLRequest(url: url)
         
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let data = data else {
-                print("No data received")
-                return
-            }
-            
-            if let article = try? JSONDecoder().decode(Welcome.self, from: data) {
-                print(article.totalResults)
+        let task = URLSession.shared.dataTask(with: request) { data, response, err in
+            guard let data else { return }
+            if let articleData = try? JSONDecoder().decode(ArticleData.self, from: data) {
+                completion(articleData.articles)
             } else {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(json)
-                } catch {
-                    print("Failed to decode JSON data: \(error.localizedDescription)")
-                }
+                completion([])
             }
+            
+        }
+        task.resume()
+    }
+    
+    func getFull(categories: [String], completion: @escaping ([Article]) -> Void) {
+        var newCategory = ""
+        categories.forEach { category in
+            newCategory.append("\(Constants.category)\(category)&")
+        }
+        guard let url = URL(string: "\(Constants.baseURL)?\(newCategory)apiKey=\(Constants.apiKey)") else { return }
+        print(url)
+        let request = URLRequest(url: url)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, err in
+            guard let data else { return }
+            if let articleData = try? JSONDecoder().decode(ArticleData.self, from: data) {
+                completion(articleData.articles)
+            } else {
+                completion([])
+            }
+            
         }
         task.resume()
     }

@@ -28,20 +28,48 @@ class RecommendedCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(_ article: Result) {
-        self.newsTitleLabel.text = article.title
-        self.categoryLabel.text = article.category
-        if let imageURL = article.imageURL, let url = URL(string: imageURL) {
-            let data = try? Data(contentsOf: url)
-            self.newsImageView.image = UIImage(data: data ?? Data())
-        } else {
-            self.newsImageView.image = UIImage(named: "NoImage")
+    func configureRecommendCell(_ newsRecommend: Recommend) {
+        DispatchQueue.main.async {
+            self.newsTitleLabel.text = newsRecommend.title
+            self.categoryLabel.text = newsRecommend.category
+            
+            switch self.categoryLabel.text {
+            case "general":
+                self.categoryLabel.text = "🔥 General"
+            case "health":
+                self.categoryLabel.text = "🫀 Health"
+            case "business":
+                self.categoryLabel.text = "💼 Business"
+            case "technology":
+                self.categoryLabel.text = "👨‍💻 Technology"
+            case "science":
+                self.categoryLabel.text = "🔬 Science"
+            case "entertainment":
+                self.categoryLabel.text = "🎮 Gaming"
+            case "sports":
+                self.categoryLabel.text = "🏈 Sports"
+            default: break
+            }
+            
+            DispatchQueue.global().async {
+                guard let imageUrl = newsRecommend.imageURL else {
+                    DispatchQueue.main.async {
+                        self.newsImageView.image = UIImage(named: "noFoto")
+                    }
+                    return
+                }
+                let url = URL(string: imageUrl)
+                if let data = try? Data(contentsOf: url!) {
+                    DispatchQueue.main.async {
+                        self.newsImageView.image = UIImage(data: data)
+                    }
+                }
+            }
         }
     }
     
     private func configureNewsImageView() {
         newsImageView.contentMode = .scaleAspectFill
-        newsImageView.image = UIImage(named: "333")
         newsImageView.contentScaleFactor = 1.0
         newsImageView.layer.cornerRadius = 20
         newsImageView.layer.masksToBounds = true
@@ -52,8 +80,9 @@ class RecommendedCell: UITableViewCell {
         newsTitleLabel.text = "The latest situation in the presedential election"
         newsTitleLabel.numberOfLines = 0
         newsTitleLabel.textAlignment = .left
-        newsTitleLabel.font = UIFont.interSemiBold16()
+        newsTitleLabel.font = UIFont.interSemiBold14()
         newsTitleLabel.textColor = .blackPrimary
+        newsTitleLabel.adjustsFontSizeToFitWidth = true
         newsTitleLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -62,6 +91,7 @@ class RecommendedCell: UITableViewCell {
         categoryLabel.textAlignment = .left
         categoryLabel.font = UIFont.interRegular14()
         categoryLabel.textColor = .greyPrimary
+        categoryLabel.adjustsFontSizeToFitWidth = true
         categoryLabel.translatesAutoresizingMaskIntoConstraints = false
     }
 }
@@ -71,8 +101,8 @@ extension RecommendedCell {
     
     func setupView() {
         contentView.addSubview(newsImageView)
-        contentView.addSubview(newsTitleLabel)
         contentView.addSubview(categoryLabel)
+        contentView.addSubview(newsTitleLabel)
         configureNewsImageView()
         configureTitleLabel()
         configureCategoryLabel()
@@ -81,19 +111,27 @@ extension RecommendedCell {
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-            newsImageView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             newsImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            newsImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             newsImageView.widthAnchor.constraint(equalToConstant: 90),
-            newsImageView.heightAnchor.constraint(equalToConstant: 90),
+            newsImageView.heightAnchor.constraint(equalToConstant: 80),
             
+            categoryLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            categoryLabel.leadingAnchor.constraint(equalTo: newsImageView.trailingAnchor, constant: 15),
+            categoryLabel.bottomAnchor.constraint(equalTo: newsTitleLabel.topAnchor, constant: -5),
             
             newsTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -20),
             newsTitleLabel.leadingAnchor.constraint(equalTo: newsImageView.trailingAnchor,constant: 15),
-            newsTitleLabel.centerYAnchor.constraint(equalTo: newsImageView.centerYAnchor),
-            
-            categoryLabel.leadingAnchor.constraint(equalTo: newsImageView.trailingAnchor, constant: 15),
-            categoryLabel.bottomAnchor.constraint(equalTo: newsTitleLabel.topAnchor, constant: -5),
+            newsTitleLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 8)
 
         ])
     }
+}
+
+struct Recommend {
+    let title: String?
+    let category: String?
+    let imageURL: String?
+    let description: String?
+    let author: String?
 }

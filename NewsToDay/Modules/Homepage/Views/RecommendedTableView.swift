@@ -7,9 +7,23 @@
 
 import UIKit
 
+protocol RecommendedTableViewDelegate: AnyObject {
+    func recommendDidSelectItemDelegate(recommendNews: Recommend)
+}
+
 class RecommendedTableView: UIView {
     
     var tableView = UITableView()
+    
+    var recommendNews: [Recommend] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    weak var delegateRecommendedTableView: RecommendedTableViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,17 +57,19 @@ class RecommendedTableView: UIView {
 extension RecommendedTableView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return recommendNews.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecommendedCell.identifier, for: indexPath) as? RecommendedCell else {
             return UITableViewCell()
         }
-        cell.selectionStyle = .none
+        cell.configureRecommendCell(recommendNews[indexPath.item])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = recommendNews[indexPath.row]
+        delegateRecommendedTableView?.recommendDidSelectItemDelegate(recommendNews: item)
     }
 }

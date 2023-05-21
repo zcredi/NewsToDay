@@ -21,13 +21,22 @@ class NewsCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private let newsImageView: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "333")
         view.contentMode = .scaleAspectFill
         view.layer.cornerRadius = 20
         view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var backgroundBlackView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0.2
+        view.layer.cornerRadius = 20
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -39,6 +48,7 @@ class NewsCell: UICollectionViewCell {
         view.textAlignment = .left
         view.font = UIFont.interBold16()
         view.textColor = .white
+        view.adjustsFontSizeToFitWidth = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -48,10 +58,11 @@ class NewsCell: UICollectionViewCell {
         view.text = "Without category"
         view.numberOfLines = 0
         view.textAlignment = .left
-        view.font = UIFont.interRegular12()
+        view.font = UIFont.interRegular16()
         view.textColor = .greyLighter
+        view.adjustsFontSizeToFitWidth = true
         view.translatesAutoresizingMaskIntoConstraints = false
-       return view
+        return view
     }()
     
     var liked: Bool = false
@@ -79,16 +90,46 @@ class NewsCell: UICollectionViewCell {
         DispatchQueue.main.async {
             self.titleLabel.text = newsData.title
             self.categoryLabel.text = newsData.category
-            if let imageURL = newsData.imageURL {
-                self.newsImageView.image = UIImage(named: imageURL)
-            } else {
-                self.newsImageView.image = UIImage(named: "333")
+            
+            switch self.categoryLabel.text {
+            case "general":
+                self.categoryLabel.text = "🔥 General"
+            case "health":
+                self.categoryLabel.text = "🫀 Health"
+            case "business":
+                self.categoryLabel.text = "💼 Business"
+            case "technology":
+                self.categoryLabel.text = "👨‍💻 Technology"
+            case "science":
+                self.categoryLabel.text = "🔬 Science"
+            case "entertainment":
+                self.categoryLabel.text = "🎮 Gaming"
+            case "sports":
+                self.categoryLabel.text = "🏈 Sports"
+            default:
+                break
+            }
+            
+            DispatchQueue.global().async {
+                guard let imageUrl = newsData.imageURL else {
+                    DispatchQueue.main.async {
+                        self.newsImageView.image = UIImage(named: "noFoto")
+                    }
+                    return
+                }
+                let url = URL(string: imageUrl)
+                if let data = try? Data(contentsOf: url!) {
+                    DispatchQueue.main.async {
+                        self.newsImageView.image = UIImage(data: data)
+                    }
+                }
             }
         }
     }
     
     private func setupViews() {
         contentView.addSubview(newsImageView)
+        contentView.addSubview(backgroundBlackView)
         contentView.addSubview(favouriteButton)
         contentView.addSubview(titleLabel)
         contentView.addSubview(categoryLabel)
@@ -100,6 +141,11 @@ class NewsCell: UICollectionViewCell {
             newsImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             newsImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             newsImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            backgroundBlackView.topAnchor.constraint(equalTo: topAnchor),
+            backgroundBlackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            backgroundBlackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            backgroundBlackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             titleLabel.leadingAnchor.constraint(equalTo: newsImageView.leadingAnchor, constant: 15),
             titleLabel.trailingAnchor.constraint(equalTo: newsImageView.trailingAnchor, constant: -15),
@@ -121,4 +167,6 @@ struct Result {
     let title: String?
     let category: String?
     let imageURL: String?
+    let description: String?
+    let author: String?
 }

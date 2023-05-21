@@ -9,12 +9,13 @@ import UIKit
 
 class HomepageViewController: UIViewController, CollectionDidSelectProtocol {
     
+    
     private var categoriesCollection = CategoriesCollectionView()
     private var middleCollectionView = NewsCollectionView()
     private var recommendedTableView = RecommendedTableView()
     private var recommendedView = RecommendedView()
-
-
+    
+    
     private let titleLabel: UILabel = {
         let view = UILabel()
         view.text = "Browse"
@@ -44,26 +45,33 @@ class HomepageViewController: UIViewController, CollectionDidSelectProtocol {
         return view
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .white
         setupCategoriesCollection()
         setupUI()
-
-        let testNews1 = Result(title: "News 1", category: "Category 1", imageURL: "333")
-        let testNews2 = Result(title: "News 2", category: "Category 2", imageURL: "333")
-        let testNews3 = Result(title: "News 3", category: "Category 3", imageURL: "333")
-        middleCollectionView.news = [testNews1, testNews2, testNews3]
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        getNewsFromCategory(categoryName: Category.allCases.randomElement()?.rawValue ?? "")
     }
     
     private func setupCategoriesCollection() {
         categoriesCollection.delegateCollectionDidSelect = self
+        middleCollectionView.delegateNewsCollectionView = self
+        recommendedTableView.delegateRecommendedTableView = self
+        let vc = tabBarController?.viewControllers?.first(where: { $0 is CategoryViewController }) as? CategoryViewController
+        vc?.delegateCategory = self
         categoriesCollection.translatesAutoresizingMaskIntoConstraints = false
         middleCollectionView.translatesAutoresizingMaskIntoConstraints = false
         recommendedTableView.translatesAutoresizingMaskIntoConstraints = false
         recommendedView.translatesAutoresizingMaskIntoConstraints = false
     }
-
+    
     private func setupUI() {
         view.addSubview(titleLabel)
         view.addSubview(subtitleLabel)
@@ -74,11 +82,11 @@ class HomepageViewController: UIViewController, CollectionDidSelectProtocol {
         view.addSubview(recommendedView)
         
         NSLayoutConstraint.activate([
-
+            
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-
+            
             subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             subtitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             subtitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
@@ -100,7 +108,7 @@ class HomepageViewController: UIViewController, CollectionDidSelectProtocol {
             recommendedView.topAnchor.constraint(equalTo: middleCollectionView.bottomAnchor, constant: 50),
             recommendedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             recommendedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        
+            
             recommendedTableView.topAnchor.constraint(equalTo: recommendedView.bottomAnchor),
             recommendedTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             recommendedTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -109,10 +117,100 @@ class HomepageViewController: UIViewController, CollectionDidSelectProtocol {
     }
     
     func getNewsFromCategory(categoryName: String) {
-        // Handle category selection
+        
+        var resultCategory = ""
+        
+        switch categoryName {
+        case "general":
+            resultCategory = "🔥 General"
+        case "health":
+            resultCategory = "🫀 Health"
+        case "business":
+            resultCategory = "💼 Business"
+        case "technology":
+            resultCategory = "👨‍💻 Technology"
+        case "science":
+            resultCategory = "🔬 Science"
+        case "entertainment":
+            resultCategory = "🎮 Gaming"
+        case "sports":
+            resultCategory = "🏈 Sports"
+        default:
+            break
+        }
+        
+        let category = resultCategory
+        
+        APIManager.shared.getAll(category: categoryName) { articles in
+            var result = [Result]()
+            articles.forEach { article in
+                let resultItem = Result(title: article.title, category: category, imageURL: article.urlToImage, description: article.description, author: article.author)
+                
+                result.append(resultItem)
+            }
+            self.middleCollectionView.news = result
+        }
+    }
+    
+}
+
+extension HomepageViewController: CategoryDidSelectProtocol {
+    
+    func switchCategories(_ category: String) -> String {
+        var result = ""
+        
+        switch category {
+        case "general":
+            result = "🔥 General"
+        case "health":
+            result = "🫀 Health"
+        case "business":
+            result = "💼 Business"
+        case "technology":
+            result = "👨‍💻 Technology"
+        case "science":
+            result = "🔬 Science"
+        case "entertainment":
+            result = "🎮 Gaming"
+        case "sports":
+            result = "🏈 Sports"
+        default: break
+        }
+        
+        return result
+    }
+    
+    func getRecommendCategory(categoryName: [String]) {
+        let categories = categoryName.map { switchCategories($0) }
+        
+        let categoryString = categories.joined(separator: ", ")
+        
+        APIManager.shared.getFull(categories: categoryName) { articles in
+            var recommend = [Recommend]()
+            articles.forEach { article in
+                let recommendItem = Recommend(title: article.title, category: categoryString, imageURL: article.urlToImage, description: article.description, author: article.author)
+                recommend.append(recommendItem)
+            }
+            self.recommendedTableView.recommendNews = recommend
+        }
     }
 }
 
+extension HomepageViewController: NewsCollectionViewDelegate {
+    func newsDidSelectItemDelegate(newsItem: Result) {
+        let vc = ArticlePageViewController()
+        vc.setupData(newsItem: newsItem)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+}
 
-
-
+extension HomepageViewController: RecommendedTableViewDelegate {
+    
+    func recommendDidSelectItemDelegate(recommendNews: Recommend) {
+        let vc = ArticlePageViewController()
+        vc.setupDataRecommend(recommendNews: recommendNews)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+}

@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol NewsCollectionViewDelegate: AnyObject {
+    func newsDidSelectItemDelegate(newsItem: Result)
+}
+
 class NewsCollectionView: UIView {
     
     var collectionView: UICollectionView!
+    let navController = NavController()
     
     var news: [Result] = [] {
         didSet {
@@ -18,10 +23,11 @@ class NewsCollectionView: UIView {
             }
         }
     }
+    
+    weak var delegateNewsCollectionView: NewsCollectionViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         configureCollection()
         addSubview(collectionView)
         setupConstraints()
@@ -37,6 +43,7 @@ class NewsCollectionView: UIView {
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .clear
+        collectionView.layer.cornerRadius = 12
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(NewsCell.self, forCellWithReuseIdentifier: NewsCell.identifier)
         collectionView.delegate = self
@@ -71,7 +78,8 @@ extension NewsCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = news[indexPath.row]
+        delegateNewsCollectionView?.newsDidSelectItemDelegate(newsItem: item)
     }
     
 }
-
