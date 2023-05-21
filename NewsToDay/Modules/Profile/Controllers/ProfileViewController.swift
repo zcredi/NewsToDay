@@ -92,6 +92,13 @@ class ProfileViewController: UIViewController {
         setupViews()
         setConstraints()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        let fifthViewController = ProfileViewController()
+//        navigationController?.pushViewController(fifthViewController, animated: true)
+    }
+
     
     private func setupViews() {
         view.addSubview(profileLabel)
@@ -104,13 +111,12 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func languageButtonTapped() {
-        let teamVC = LanguageViewController()
-        self.navigationController?.pushViewController(teamVC, animated: true)
+        let navBar = UINavigationController(rootViewController: LanguageViewController())
+        present(navBar, animated: true)
     }
-    
     @objc func termsAndConditionsButtonTapped() {
-        let teamVC = TermsViewController()
-        self.navigationController?.pushViewController(teamVC, animated: true)
+        let navBar = UINavigationController(rootViewController: TermsViewController())
+        present(navBar, animated: true)
     }
     
     @objc func signOutButtonTapped() {
