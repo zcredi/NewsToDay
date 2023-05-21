@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F249BB62A1124190045CD3D /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F249BB52A1124190045CD3D /* LanguageViewController.swift */; };
+		0F249BBC2A1386360045CD3D /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F249BBB2A1386360045CD3D /* TermsViewController.swift */; };
+		0F249BC02A13A86F0045CD3D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F249BBF2A13A86F0045CD3D /* ProfileViewController.swift */; };
+		0F249BC62A14C8110045CD3D /* NavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F249BC52A14C8110045CD3D /* NavController.swift */; };
 		325269842A0B6EA400F473E8 /* ArticlePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325269832A0B6EA400F473E8 /* ArticlePageViewController.swift */; };
 		325269862A0B6EE600F473E8 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325269852A0B6EE600F473E8 /* ArticleView.swift */; };
 		32EDC1E52A0B2465000FD922 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 32EDC1E42A0B2465000FD922 /* SnapKit */; };
@@ -29,7 +33,6 @@
 		86E8C5C72A09154400059CF4 /* UITabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5C62A09154400059CF4 /* UITabbarController.swift */; };
 		86E8C5D52A09289E00059CF4 /* HomepageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5D42A09289E00059CF4 /* HomepageViewController.swift */; };
 		86E8C5D82A0928BD00059CF4 /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5D72A0928BD00059CF4 /* BookmarksViewController.swift */; };
-		86E8C5DA2A0928CC00059CF4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5D92A0928CC00059CF4 /* ProfileViewController.swift */; };
 		86E8C5DD2A092B1700059CF4 /* UIColor+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5DC2A092B1700059CF4 /* UIColor+App.swift */; };
 		86E8C5E32A092CBE00059CF4 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5E22A092CBE00059CF4 /* CategoryViewController.swift */; };
 		86E8C5E92A0A5E6B00059CF4 /* UIFont+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5E82A0A5E6B00059CF4 /* UIFont+App.swift */; };
@@ -45,6 +48,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F249BB52A1124190045CD3D /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
+		0F249BBB2A1386360045CD3D /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		0F249BBF2A13A86F0045CD3D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		0F249BC52A14C8110045CD3D /* NavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavController.swift; sourceTree = "<group>"; };
 		325269832A0B6EA400F473E8 /* ArticlePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlePageViewController.swift; sourceTree = "<group>"; };
 		325269852A0B6EE600F473E8 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
 		86493DF72A196F1000938326 /* NavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavController.swift; sourceTree = "<group>"; };
@@ -68,7 +75,6 @@
 		86E8C5C62A09154400059CF4 /* UITabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabbarController.swift; sourceTree = "<group>"; };
 		86E8C5D42A09289E00059CF4 /* HomepageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepageViewController.swift; sourceTree = "<group>"; };
 		86E8C5D72A0928BD00059CF4 /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
-		86E8C5D92A0928CC00059CF4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		86E8C5DC2A092B1700059CF4 /* UIColor+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+App.swift"; sourceTree = "<group>"; };
 		86E8C5E22A092CBE00059CF4 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		86E8C5E82A0A5E6B00059CF4 /* UIFont+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+App.swift"; sourceTree = "<group>"; };
@@ -244,7 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				86E8C5D32A09287200059CF4 /* Models */,
-				86E8C5D22A09287000059CF4 /* Views */,
 				86E8C5D12A09286E00059CF4 /* Controllers */,
 			);
 			path = Profile;
@@ -325,17 +330,12 @@
 		86E8C5D12A09286E00059CF4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				86493DF72A196F1000938326 /* NavController.swift */,
-				86E8C5D92A0928CC00059CF4 /* ProfileViewController.swift */,
+				0F249BBF2A13A86F0045CD3D /* ProfileViewController.swift */,
+				0F249BB52A1124190045CD3D /* LanguageViewController.swift */,
+				0F249BBB2A1386360045CD3D /* TermsViewController.swift */,
+				0F249BC52A14C8110045CD3D /* NavController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		86E8C5D22A09287000059CF4 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		86E8C5D32A09287200059CF4 /* Models */ = {
@@ -482,10 +482,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+
 				86E8C5DA2A0928CC00059CF4 /* ProfileViewController.swift in Sources */,
 				865950F92A10EC4E003D0475 /* APIManager.swift in Sources */,
 				86F12BDB2A0F93250059DB83 /* BookmarksExtensions.swift in Sources */,
 				86E8C5E92A0A5E6B00059CF4 /* UIFont+App.swift in Sources */,
+				0F249BB62A1124190045CD3D /* LanguageViewController.swift in Sources */,
 				86E8C5D82A0928BD00059CF4 /* BookmarksViewController.swift in Sources */,
 				86F12BD92A0F905D0059DB83 /* CategoryCollectionViewCell.swift in Sources */,
 				867060112A139A0200AFE158 /* NewsCollectionView.swift in Sources */,
@@ -507,7 +509,10 @@
 				86F12BD42A0F902F0059DB83 /* ContentCell.swift in Sources */,
 				865950FF2A10F963003D0475 /* CategoryModel.swift in Sources */,
 				86E8C5DD2A092B1700059CF4 /* UIColor+App.swift in Sources */,
+				0F249BC62A14C8110045CD3D /* NavController.swift in Sources */,
 				325269862A0B6EE600F473E8 /* ArticleView.swift in Sources */,
+				0F249BC02A13A86F0045CD3D /* ProfileViewController.swift in Sources */,
+				0F249BBC2A1386360045CD3D /* TermsViewController.swift in Sources */,
 				8670601A2A139A6700AFE158 /* NewsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

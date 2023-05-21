@@ -31,6 +31,7 @@ class MainTabBarController: UITabBarController {
         let bookmarks = BookmarksViewController()
         let profile = ProfileViewController()
         
+        
 
         setViewControllers([homepage, category, bookmarks, profile], animated: true)
         
