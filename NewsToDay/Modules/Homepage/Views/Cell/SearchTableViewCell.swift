@@ -41,14 +41,15 @@ class SearchTableViewCell: UITableViewCell {
 extension SearchTableViewCell {
     
     func setupView() {
-      
+        contentView.addSubview(searchTitleLabel)
+        configureTitleLabel()
     }
     
     
     func setConstraints() {
-        NSLayoutConstraint.activate([
-        
-
+            NSLayoutConstraint.activate([
+                searchTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+                searchTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
         ])
     }
 }

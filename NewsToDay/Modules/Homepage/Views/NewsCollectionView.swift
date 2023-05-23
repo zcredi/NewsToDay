@@ -83,3 +83,13 @@ extension NewsCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
 }
+
+extension NewsCollectionView: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        news.filter { result in
+            result.title!.contains(searchBar.text!)
+        }
+    }
+}
