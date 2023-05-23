@@ -1,10 +1,3 @@
-//
-//  BookmarksViewController.swift
-//  NewsToDay
-//
-//  Created by Владислав on 08.05.2023.
-//
-
 import UIKit
 
 class BookmarksViewController: UIViewController {
@@ -37,7 +30,7 @@ class BookmarksViewController: UIViewController {
         tableView.allowsSelection = true
         tableView.separatorStyle = .none
         tableView.rowHeight = 114
-        tableView.register(ContentCell.self, forCellReuseIdentifier: ContentCell.identifier)
+        tableView.register(BookmarksCell.self, forCellReuseIdentifier: BookmarksCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()

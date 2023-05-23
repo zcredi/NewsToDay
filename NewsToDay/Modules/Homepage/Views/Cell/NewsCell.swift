@@ -12,6 +12,11 @@ class NewsCell: UICollectionViewCell {
     
     static let identifier = "NewsCell"
     
+    var liked: Bool = false
+    var currentNews: Result?
+    let bookmarksManager = BookmarksManager.shared
+    let bookmarksCell = BookmarksCell()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -65,8 +70,6 @@ class NewsCell: UICollectionViewCell {
         return view
     }()
     
-    var liked: Bool = false
-    
     lazy var favouriteButton: UIButton = {
         let view = UIButton()
         view.tintColor = .white
@@ -80,9 +83,12 @@ class NewsCell: UICollectionViewCell {
         if liked {
             favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
             liked = false
+            bookmarksManager.bookmarksArray.removeAll { $0 == currentNews }
         } else {
             favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
             liked = true
+            bookmarksManager.bookmarksArray.append(currentNews!)
+            print(currentNews!)
         }
     }
     
@@ -127,6 +133,48 @@ class NewsCell: UICollectionViewCell {
         }
     }
     
+    func configureBookmarks(_ newsData: Result) {
+            DispatchQueue.main.async {
+                self.bookmarksCell.contentSubTitle.text = newsData.title
+                self.bookmarksCell.contentTitle.text = newsData.category
+                
+                switch self.bookmarksCell.contentTitle.text {
+                case "general":
+                    self.bookmarksCell.contentTitle.text = "🔥 General"
+                case "health":
+                    self.bookmarksCell.contentTitle.text = "🫀 Health"
+                case "business":
+                    self.bookmarksCell.contentTitle.text = "💼 Business"
+                case "technology":
+                    self.bookmarksCell.contentTitle.text = "👨‍💻 Technology"
+                case "science":
+                    self.bookmarksCell.contentTitle.text = "🔬 Science"
+                case "entertainment":
+                    self.bookmarksCell.contentTitle.text = "🎮 Gaming"
+                case "sports":
+                    self.bookmarksCell.contentTitle.text = "🏈 Sports"
+                default:
+                    break
+                }
+                
+                DispatchQueue.global().async {
+                    guard let imageUrl = newsData.imageURL else {
+                        DispatchQueue.main.async {
+                            self.bookmarksCell.contentImage.image = UIImage(named: "noFoto")
+                        }
+                        return
+                    }
+                    let url = URL(string: imageUrl)
+                    if let data = try? Data(contentsOf: url!) {
+                        DispatchQueue.main.async {
+                            self.bookmarksCell.contentImage.image = UIImage(data: data)
+                        }
+                    }
+                }
+                self.currentNews = newsData
+            }
+    }
+    
     private func setupViews() {
         contentView.addSubview(newsImageView)
         contentView.addSubview(backgroundBlackView)
@@ -163,7 +211,7 @@ class NewsCell: UICollectionViewCell {
     }
 }
 
-struct Result {
+struct Result: Codable, Equatable {
     let title: String?
     let category: String?
     let imageURL: String?

@@ -10,6 +10,7 @@
 		325269842A0B6EA400F473E8 /* ArticlePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325269832A0B6EA400F473E8 /* ArticlePageViewController.swift */; };
 		325269862A0B6EE600F473E8 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325269852A0B6EE600F473E8 /* ArticleView.swift */; };
 		32EDC1E52A0B2465000FD922 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 32EDC1E42A0B2465000FD922 /* SnapKit */; };
+		862134A82A1D016A001EB700 /* BookmarksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862134A72A1D016A001EB700 /* BookmarksManager.swift */; };
 		86493E102A1A29B400938326 /* SingInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86493E0D2A1A29B400938326 /* SingInViewController.swift */; };
 		86493E112A1A29B400938326 /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86493E0E2A1A29B400938326 /* SingUpViewController.swift */; };
 		86493E142A1A2D1700938326 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 86493E132A1A2D1700938326 /* FirebaseAuth */; };
@@ -49,7 +50,7 @@
 		86E8C5F12A0A5F7600059CF4 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86E8C5ED2A0A5F7600059CF4 /* Inter-Regular.ttf */; };
 		86E8C5F22A0A5F7600059CF4 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86E8C5EE2A0A5F7600059CF4 /* Inter-Medium.ttf */; };
 		86E8C5F42A0A69F900059CF4 /* UILabel+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8C5F32A0A69F900059CF4 /* UILabel+App.swift */; };
-		86F12BD42A0F902F0059DB83 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F12BD32A0F902F0059DB83 /* ContentCell.swift */; };
+		86F12BD42A0F902F0059DB83 /* BookmarksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F12BD32A0F902F0059DB83 /* BookmarksCell.swift */; };
 		86F12BD82A0F905D0059DB83 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F12BD52A0F905D0059DB83 /* CategoryView.swift */; };
 		86F12BD92A0F905D0059DB83 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F12BD72A0F905D0059DB83 /* CategoryCollectionViewCell.swift */; };
 		86F12BDB2A0F93250059DB83 /* BookmarksExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F12BDA2A0F93250059DB83 /* BookmarksExtensions.swift */; };
@@ -58,6 +59,7 @@
 /* Begin PBXFileReference section */
 		325269832A0B6EA400F473E8 /* ArticlePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlePageViewController.swift; sourceTree = "<group>"; };
 		325269852A0B6EE600F473E8 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
+		862134A72A1D016A001EB700 /* BookmarksManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksManager.swift; sourceTree = "<group>"; };
 		86493E0D2A1A29B400938326 /* SingInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingInViewController.swift; sourceTree = "<group>"; };
 		86493E0E2A1A29B400938326 /* SingUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
 		86493E192A1A2DDD00938326 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -97,7 +99,7 @@
 		86E8C5ED2A0A5F7600059CF4 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		86E8C5EE2A0A5F7600059CF4 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
 		86E8C5F32A0A69F900059CF4 /* UILabel+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+App.swift"; sourceTree = "<group>"; };
-		86F12BD32A0F902F0059DB83 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
+		86F12BD32A0F902F0059DB83 /* BookmarksCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarksCell.swift; sourceTree = "<group>"; };
 		86F12BD52A0F905D0059DB83 /* CategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		86F12BD72A0F905D0059DB83 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		86F12BDA2A0F93250059DB83 /* BookmarksExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarksExtensions.swift; sourceTree = "<group>"; };
@@ -167,6 +169,14 @@
 				86F12BD52A0F905D0059DB83 /* CategoryView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		862134AB2A1D04A9001EB700 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				86F12BD32A0F902F0059DB83 /* BookmarksCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		86493E0A2A1A29B400938326 /* AuthPage */ = {
@@ -363,7 +373,7 @@
 		86E8C5CC2A09285000059CF4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				86F12BD32A0F902F0059DB83 /* ContentCell.swift */,
+				862134AB2A1D04A9001EB700 /* Cell */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -420,6 +430,7 @@
 			children = (
 				865950F82A10EC4E003D0475 /* APIManager.swift */,
 				865950FA2A10EC6F003D0475 /* NewsData.swift */,
+				862134A72A1D016A001EB700 /* BookmarksManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -514,6 +525,7 @@
 				86E8C5E92A0A5E6B00059CF4 /* UIFont+App.swift in Sources */,
 				86E8C5D82A0928BD00059CF4 /* BookmarksViewController.swift in Sources */,
 				86493E1F2A1A304D00938326 /* WelcomeViewController.swift in Sources */,
+				862134A82A1D016A001EB700 /* BookmarksManager.swift in Sources */,
 				86493E1D2A1A303C00938326 /* SplashScreenViewController.swift in Sources */,
 				86493E102A1A29B400938326 /* SingInViewController.swift in Sources */,
 				86F12BD92A0F905D0059DB83 /* CategoryCollectionViewCell.swift in Sources */,
@@ -538,7 +550,7 @@
 				86E8C5A52A090ED700059CF4 /* AppDelegate.swift in Sources */,
 				8670601C2A139A7700AFE158 /* RecommendedCell.swift in Sources */,
 				86E8C5A72A090ED700059CF4 /* SceneDelegate.swift in Sources */,
-				86F12BD42A0F902F0059DB83 /* ContentCell.swift in Sources */,
+				86F12BD42A0F902F0059DB83 /* BookmarksCell.swift in Sources */,
 				865950FF2A10F963003D0475 /* CategoryModel.swift in Sources */,
 				86E8C5DD2A092B1700059CF4 /* UIColor+App.swift in Sources */,
 				325269862A0B6EE600F473E8 /* ArticleView.swift in Sources */,

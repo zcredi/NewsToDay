@@ -15,6 +15,7 @@ class NewsCollectionView: UIView {
     
     var collectionView: UICollectionView!
     let navController = NavController()
+    let bookmarksManager = BookmarksManager.shared
     
     var news: [Result] = [] {
         didSet {
@@ -68,7 +69,17 @@ extension NewsCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCell.identifier, for: indexPath) as? NewsCell else {
             return UICollectionViewCell()
         }
-        cell.configureCell(news[indexPath.item])
+        
+        let selectedNews = news[indexPath.row]
+        if bookmarksManager.bookmarksArray.contains(selectedNews) {
+            cell.liked = true
+            cell.favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        } else {
+            cell.favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        }
+        cell.configureBookmarks(news[indexPath.row])
+        cell.configureCell(news[indexPath.row])
+        
         return cell
     }
     

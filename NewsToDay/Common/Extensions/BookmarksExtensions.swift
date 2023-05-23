@@ -16,7 +16,7 @@ extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ContentCell", for: indexPath) as? ContentCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BookmarksCell", for: indexPath) as? BookmarksCell else {
             fatalError("")
         }
         

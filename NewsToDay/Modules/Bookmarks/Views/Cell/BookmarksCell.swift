@@ -7,11 +7,11 @@
 
 import UIKit
 
-class ContentCell: UITableViewCell {
+class BookmarksCell: UITableViewCell {
     
-    static let identifier = "ContentCell"
+    static let identifier = "BookmarksCell"
     
-    private let contentImage: UIImageView = {
+     let contentImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.backgroundColor = .purplePrimary
