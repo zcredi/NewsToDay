@@ -14,16 +14,16 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Create UI
     
-    private lazy var categoryButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = .greyLighter
-        button.setTitle("🏈 Sports", for: .normal)
-        button.setTitleColor(.greyDark, for: .normal)
-        button.titleLabel?.font = .interSemiBold16()
-        button.layer.cornerRadius = 12
-        button.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
-        return button
+    
+    public lazy var categoryView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .greyLighter
+        view.layer.cornerRadius = 12
+        return view
     }()
+    
+    public lazy var categoriesLabel = UILabel(text: "", font: .interSemiBold16(), textColor: .blackLight)
+    
     
     //MARK: - Lifecycle
     
@@ -39,12 +39,8 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-       addSubview(categoryButton)
-    }
-    
-    @objc
-    private func categoryButtonTapped() {
-        print("Sports")
+       addSubview(categoryView)
+        categoryView.addSubview(categoriesLabel)
     }
 }
 
@@ -52,13 +48,18 @@ class CategoryCollectionViewCell: UICollectionViewCell {
 
 extension CategoryCollectionViewCell {
     private func setConstraints() {
-        categoryButton.translatesAutoresizingMaskIntoConstraints = false
+        categoryView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            categoryButton.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-            categoryButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            categoryButton.heightAnchor.constraint(equalToConstant: 72),
-            categoryButton.widthAnchor.constraint(equalToConstant: 160),
-            categoryButton.centerXAnchor.constraint(equalTo: centerXAnchor)
+            categoryView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            categoryView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            categoryView.heightAnchor.constraint(equalToConstant: 72),
+            categoryView.widthAnchor.constraint(equalToConstant: 160),
+            categoryView.centerXAnchor.constraint(equalTo: centerXAnchor)
+        ])
+        categoriesLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            categoriesLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            categoriesLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }

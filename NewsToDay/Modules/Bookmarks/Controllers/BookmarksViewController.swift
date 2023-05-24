@@ -7,10 +7,20 @@
 
 import UIKit
 
+
+
 class BookmarksViewController: UIViewController {
     
-    
-    private let value: [Any] = []
+    var news: [Result] = [NewsToDay.Result(title: Optional("BodyBoost Keto + ACV Gummies [Reviews] – [Truth Exposed 2023] Urgent Warning! What Real Customer Say? Official Website! - mid-day.com"), category: Optional("🫀 Health"), imageURL: Optional("https://images.mid-day.com/images/images/2023/may/BodyBoost-2305_d.jpg"), description: Optional("Overweight issues are the common problems that are being a headache from ancient times."), author: nil), NewsToDay.Result(title: Optional("НА ЖИВО: Локомотив София - Славия 1:1, домакините с човек по-малко - Gong.bg"), category: Optional("🏈 Sports"), imageURL: nil, description: nil, author: Optional("Gong.bg"))] {
+        didSet {
+            DispatchQueue.main.async {
+                print("111")
+                self.updateCollectionViewVisibility()
+                self.tableSaveContent.reloadData()
+                print(self.news)
+            }
+        }
+    }
     
     //MARK: - UI Components
     
@@ -87,22 +97,33 @@ class BookmarksViewController: UIViewController {
     
     //MARK: - viewDidLoad
     
- 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateCollectionViewVisibility()
+        print("VWA--\(self.news)")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
         
         tableSaveContent.delegate = self
         tableSaveContent.dataSource = self
-        
-        if value.isEmpty {
+        print("VDL--\(self.news)")
+
+    }
+    
+    func updateCollectionViewVisibility() {
+        if news.isEmpty {
             tableSaveContent.isHidden = true
+            tableSaveContent.reloadData()
             imageBook.isHidden = false
             circleView.isHidden = false
             adviceLabel.isHidden = false
         } else {
             tableSaveContent.isHidden = false
+            tableSaveContent.reloadData()
             imageBook.isHidden = true
             circleView.isHidden = true
             adviceLabel.isHidden = true
@@ -132,7 +153,7 @@ class BookmarksViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor , constant: 72),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor , constant: 8),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
@@ -161,6 +182,25 @@ class BookmarksViewController: UIViewController {
 
 
 
+
+extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(news.count)
+        return news.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ContentCell", for: indexPath) as? ContentCell else {
+            return UITableViewCell()
+        }
+        
+        cell.configureBookmarks(news[indexPath.row])
+        
+        return cell
+    }
+    
+}
 
 
 

@@ -6,7 +6,7 @@ class NavController: UINavigationController {
 //        super.viewWillAppear(animated)
 //        config()
 //    }
-//    
+//
 //    private func config() {
 //        navigationBar.backgroundColor = .clear
 //        navigationBar.backIndicatorImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal)
@@ -14,7 +14,7 @@ class NavController: UINavigationController {
 //        navigationBar.tintColor = .label
 //        let backButton = UIBarButtonItem()
 //        navigationBar.topItem?.backBarButtonItem = backButton
-//        
+//
 //        // Set the font and size of the title
 //        let titleFont = UIFont.interSemiBold24()
 //        let titleColor = UIColor.blackPrimary

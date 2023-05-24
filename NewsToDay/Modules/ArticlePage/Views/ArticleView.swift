@@ -9,6 +9,10 @@ import UIKit
 import SnapKit
 
 class ArticleView: UIView {
+    
+    private var isLiked: Bool = false
+    var result: Result!
+
     enum Constans {
         static let politic = UIImage(named: "politic")
         static let back = "backButton"
@@ -22,12 +26,21 @@ class ArticleView: UIView {
         imageView.image = Constans.politic
         return imageView
     }()
+    
+    let backgroundBlackView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0.2
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // MARK: - backButton
     private lazy var backButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: Constans.back), for: .normal)
         button.tintColor = .white
-        button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        button.addTarget(nil, action: #selector(ArticlePageViewController.backButtonPressed), for: .touchUpInside)
         return button
     }()
     // MARK: - bookmarkButton
@@ -35,7 +48,7 @@ class ArticleView: UIView {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(systemName: Constans.bookmarkNormal), for: .normal)
         button.tintColor = .white
-        button.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         return button
     }()
     // MARK: - shareButton
@@ -106,16 +119,9 @@ class ArticleView: UIView {
         let label = UILabel()
         label.font = .interRegular16()
         label.textColor = .greyDarker
-        label.textAlignment = .left
         label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        var paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.24
-        label.attributedText = NSMutableAttributedString(string: "Leads in individual states may change from \none party to another as all the votes are\ncounted. Select a state for detailed results,\nand select the Senate, House or Governor\ntabs to view those races.\n\nFor more detailed state results click on the\n States A-Z links at the bottom of this page.\nResults source: NEP/Edison via Reuters.\nLeads in individual states may change from\n one party to another as all the votes are\ncounted. Select a state for detailed results,\nand select the Senate, House or Governor\n tabs to view those races.\n\nFor more detailed state results click on the\nStates A-Z links at the bottom of this page.\nResults source: NEP/Edison via Reuters.\n\nLeads in individual states may change from\none party to another as all the votes are\ncounted. Select a state for detailed results,\nand select the Senate, House or Governor\ntabs to view those races.\n\nFor more detailed state results click on the\nStates A-Z links at the bottom of this page.\nResults source: NEP/Edison via Reuters.", attributes: [NSAttributedString.Key.paragraphStyle : paragraphStyle])
         return label
     }()
-    // MARK: - let/var
-    var isSelected = false
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -126,23 +132,22 @@ class ArticleView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    // MARK: - backButtonPressed
-    @objc private func backButtonPressed() {
-//        dismiss(animated: true)
-        print("backButtonPressed")
-    }
+    
     // MARK: - bookmarkButtonPressed
-    @objc private func bookmarkButtonPressed(_ sender: UIButton) {
-        if isSelected {
-            bookmarkButton.setBackgroundImage(UIImage(systemName: Constans.bookmarkNormal), for: .normal)
-            isSelected = false
-            bookmarkButton.tintColor = .white
-        } else {
-            bookmarkButton.setBackgroundImage(UIImage(systemName: Constans.bookmarkSelected), for: .normal)
-            isSelected = true
-            bookmarkButton.tintColor = .red
-        }
+    @objc private func likeButtonTapped() {
+        isLiked.toggle()
+        let imageName = isLiked ? "bookmark.fill" : "bookmark"
+        bookmarkButton.setImage(UIImage(systemName: imageName), for: .normal)
+        UserDefaults.standard.saveLikeState(isLiked, for: result.title!)
     }
+    
+    func updateLikeButtonState() {
+        let isLiked = UserDefaults.standard.getLikeState(for: result.title!)
+        self.isLiked = isLiked
+        let imageName = isLiked ? "bookmark.fill" : "bookmark"
+        bookmarkButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+    
     // MARK: - shareButtonPressed
     @objc func shareButtonPressed(_ sender: UIButton) {
         let items:[Any] = [URL(string: "https://apple.com")!, UIImage(named: "politic")!]
@@ -155,6 +160,7 @@ class ArticleView: UIView {
     private func setupViews() {
         
         addSubview(imageView)
+        addSubview(backgroundBlackView)
         addSubview(backButton)
         addSubview(bookmarkButton)
         addSubview(shareButton)
@@ -173,6 +179,11 @@ class ArticleView: UIView {
             make.trailing.leading.top.equalToSuperview()
             make.height.equalTo(384)
         }
+        
+        backgroundBlackView.snp.makeConstraints { make in
+            make.edges.equalTo(imageView)
+        }
+        
         backButton.snp.makeConstraints { make in
             make.top.equalTo(78)
             make.leading.equalTo(26)
@@ -186,13 +197,13 @@ class ArticleView: UIView {
             make.trailing.equalTo(-21)
         }
         themeNewsLabel.snp.makeConstraints { make in
-            make.top.equalTo(backButton.snp.bottom).inset(-79)
+            make.top.equalTo(backButton.snp.bottom).inset(-69)
             make.leading.equalTo(20)
             make.width.equalTo(75)
             make.height.equalTo(32)
         }
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(themeNewsLabel.snp.bottom).inset(-16)
+            make.top.equalTo(themeNewsLabel.snp.bottom).inset(-12)
             make.leading.equalTo(20)
             make.trailing.equalTo(-25)
         }
@@ -201,7 +212,8 @@ class ArticleView: UIView {
             make.leading.equalTo(26)
         }
         autor.snp.makeConstraints { make in
-            make.top.equalTo(nameAutor.snp.bottom).inset(-10)
+            make.top.equalTo(nameAutor.snp.bottom).inset(10)
+            make.bottom.equalTo(imageView.snp.bottom).inset(16)
             make.leading.equalTo(26)
         }
         scrollView.snp.makeConstraints { make in
@@ -211,13 +223,13 @@ class ArticleView: UIView {
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
         }
         resultsLabel.snp.makeConstraints { make in
-            make.top.equalTo(scrollView.snp.top).inset(24)
+            make.top.equalTo(imageView.snp.bottom).inset(-10)
             make.leading.equalTo(20)
         }
         textLabel.snp.makeConstraints { make in
             make.top.equalTo(resultsLabel.snp.bottom).inset(-8)
-            make.leading.equalTo(scrollView.snp.leading).inset(20)
-            make.trailing.equalTo(scrollView.snp.trailing).inset(-20)
+            make.leading.equalTo(snp.leading).inset(20)
+            make.trailing.equalTo(snp.trailing).inset(10)
             make.bottom.equalTo(scrollView.snp.bottom)
         }
     }

@@ -18,12 +18,17 @@ class CategoryView: UIView {
     
     //MARK: - Create UI
     
+    private lazy var categories: [String] = []
+    public lazy var categoriesSelected: [String] = []
+    
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
         collectionView.backgroundColor = .clear
+        collectionView.allowsMultipleSelection = true
         return collectionView
     }()
     
@@ -32,6 +37,15 @@ class CategoryView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: Constants.idCategoryCell)
+        
+        APIManager.shared.getCategory { [weak self] values in
+            DispatchQueue.main.async {
+                guard let self else { return }
+                self.categories = values
+                self.collectionView.reloadData()
+            }
+        }
+        
         setupViews()
         setConstraints()
         setDelegates()
@@ -51,7 +65,7 @@ class CategoryView: UIView {
         addSubview(collectionView)
         collectionView.showsVerticalScrollIndicator = true
     }
-
+    
 }
 
 //MARK: - setConstraints()
@@ -72,13 +86,31 @@ extension CategoryView {
 
 extension CategoryView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        return categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.idCategoryCell, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
         
+        switch categories[indexPath.item] {
+        case "general":
+            cell.categoriesLabel.text = "🔥 General"
+        case "health":
+            cell.categoriesLabel.text = "🫀 Health"
+        case "business":
+            cell.categoriesLabel.text = "💼 Business"
+        case "technology":
+            cell.categoriesLabel.text = "👨‍💻 Technology"
+        case "science":
+            cell.categoriesLabel.text = "🔬 Science"
+        case "entertainment":
+            cell.categoriesLabel.text = "🎮 Gaming"
+        case "sports":
+            cell.categoriesLabel.text = "🏈 Sports"
+        default:
+            cell.categoriesLabel.text = "Random"
+        }
         
         return cell
     }
@@ -89,19 +121,26 @@ extension CategoryView: UICollectionViewDataSource {
 extension CategoryView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right - Constants.collectionViewTopSpacing) / 2
-        let height = collectionView.frame.height / 10
+        let height = collectionView.frame.height / 13
         return CGSize(width: width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         Constants.collectionViewTopSpacing
-        }
     }
-
-//MARK: - UICollectionViewDelegate
-
-extension CategoryView: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       print(indexPath)
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+        let item = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell
+        categoriesSelected.append(categories[indexPath.item])
+        item?.categoryView.backgroundColor = .greyLight
+    
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let item = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell
+        categoriesSelected.removeAll(where: { $0 == categories[indexPath.item] })
+        item?.categoryView.backgroundColor = .greyLighter
     }
 }
