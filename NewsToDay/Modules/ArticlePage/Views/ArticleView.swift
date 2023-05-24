@@ -9,6 +9,10 @@ import UIKit
 import SnapKit
 
 class ArticleView: UIView {
+    
+    private var isLiked: Bool = false
+    var result: Result!
+
     enum Constans {
         static let politic = UIImage(named: "politic")
         static let back = "backButton"
@@ -44,7 +48,7 @@ class ArticleView: UIView {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(systemName: Constans.bookmarkNormal), for: .normal)
         button.tintColor = .white
-        button.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         return button
     }()
     // MARK: - shareButton
@@ -118,8 +122,6 @@ class ArticleView: UIView {
         label.numberOfLines = 0
         return label
     }()
-    // MARK: - let/var
-    var isSelected = false
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -132,17 +134,20 @@ class ArticleView: UIView {
     }
     
     // MARK: - bookmarkButtonPressed
-    @objc private func bookmarkButtonPressed(_ sender: UIButton) {
-        if isSelected {
-            bookmarkButton.setBackgroundImage(UIImage(systemName: Constans.bookmarkNormal), for: .normal)
-            isSelected = false
-            bookmarkButton.tintColor = .white
-        } else {
-            bookmarkButton.setBackgroundImage(UIImage(systemName: Constans.bookmarkSelected), for: .normal)
-            isSelected = true
-            bookmarkButton.tintColor = .red
-        }
+    @objc private func likeButtonTapped() {
+        isLiked.toggle()
+        let imageName = isLiked ? "bookmark.fill" : "bookmark"
+        bookmarkButton.setImage(UIImage(systemName: imageName), for: .normal)
+        UserDefaults.standard.saveLikeState(isLiked, for: result.title!)
     }
+    
+    func updateLikeButtonState() {
+        let isLiked = UserDefaults.standard.getLikeState(for: result.title!)
+        self.isLiked = isLiked
+        let imageName = isLiked ? "bookmark.fill" : "bookmark"
+        bookmarkButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+    
     // MARK: - shareButtonPressed
     @objc func shareButtonPressed(_ sender: UIButton) {
         let items:[Any] = [URL(string: "https://apple.com")!, UIImage(named: "politic")!]
