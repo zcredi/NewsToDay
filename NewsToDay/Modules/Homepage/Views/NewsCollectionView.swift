@@ -25,12 +25,15 @@ class NewsCollectionView: UIView {
     }
     
     weak var delegateNewsCollectionView: NewsCollectionViewDelegate?
-
+    
+    var isSearching = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureCollection()
         addSubview(collectionView)
         setupConstraints()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -56,6 +59,7 @@ class NewsCollectionView: UIView {
         collectionView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
+    
 }
 
 extension NewsCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -83,3 +87,55 @@ extension NewsCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
 }
+
+extension NewsCollectionView: UISearchBarDelegate {
+
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+                
+                    
+      var filteredNews = news
+                    
+        filteredNews = news.filter { result in
+                        
+            if searchText == "" {
+                isSearching = false
+                return true
+            } else {
+                isSearching = true
+                return result.title!.lowercased().contains(searchText.lowercased())
+            }
+        }
+        news = filteredNews
+        collectionView.reloadData()
+    }
+}
+
+
+
+//self.filteredData.removeAll()
+//       guard searchText != "" || searchText != " " else {
+//           print("empty search")
+//           return
+//       }
+
+//       for item in data {
+//           let text = searchText.lowercased()
+//           let isArrayContain = item.lowercased().range(of: text)
+//
+//           if isArrayContain != nil {
+//               print("Search complete")
+//               filteredData.append(item)
+//           }
+//       }
+//
+//       print(filteredData)
+//
+//       if searchBar.text == "" {
+//           isSearching = false
+//           tableView.reloadData()
+//       } else {
+//           isSearching = true
+//           filteredData = data.filter({$0.contains(searchBar.text ?? "")})
+//           tableView.reloadData()
+//       }
