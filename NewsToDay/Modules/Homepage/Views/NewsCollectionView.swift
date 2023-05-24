@@ -72,7 +72,6 @@ extension NewsCollectionView: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCell.identifier, for: indexPath) as? NewsCell else {
             return UICollectionViewCell()
         }
-        let bVC = BookmarksViewController()
         
         cell.configureCell(news[indexPath.item])
         return cell
