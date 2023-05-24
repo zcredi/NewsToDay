@@ -94,10 +94,10 @@ class NewsCell: UICollectionViewCell {
         UserDefaults.standard.saveLikeState(isLiked, for: result.title!)
         
         if isLiked {
-            bookmarksViewController.value.append(result)
+            bookmarksViewController.news.append(result)
             bookmarksViewController.updateCollectionViewVisibility()
         } else {
-            bookmarksViewController.value.removeAll { $0.title == result.title }
+            bookmarksViewController.news.removeAll { $0.title == result.title }
         }
     }
     

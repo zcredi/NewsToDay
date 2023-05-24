@@ -231,18 +231,3 @@ extension HomepageViewController: RecommendedTableViewDelegate {
         present(vc, animated: true)
     }
 }
-
-//extension HomepageViewController: UITableViewDelegate, UITableViewDataSource {
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 5
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as? SearchTableViewCell else {
-//            return UITableViewCell()
-//        }
-//
-//        return cell
-//    }
-//}

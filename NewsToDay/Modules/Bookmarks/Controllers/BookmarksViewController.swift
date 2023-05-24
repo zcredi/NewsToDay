@@ -11,12 +11,14 @@ import UIKit
 
 class BookmarksViewController: UIViewController {
     
-    var value: [Result] = [] {
+    var news: [Result] = [NewsToDay.Result(title: Optional("BodyBoost Keto + ACV Gummies [Reviews] – [Truth Exposed 2023] Urgent Warning! What Real Customer Say? Official Website! - mid-day.com"), category: Optional("🫀 Health"), imageURL: Optional("https://images.mid-day.com/images/images/2023/may/BodyBoost-2305_d.jpg"), description: Optional("Overweight issues are the common problems that are being a headache from ancient times."), author: nil), NewsToDay.Result(title: Optional("НА ЖИВО: Локомотив София - Славия 1:1, домакините с човек по-малко - Gong.bg"), category: Optional("🏈 Sports"), imageURL: nil, description: nil, author: Optional("Gong.bg"))] {
         didSet {
-            print("111")
-            self.updateCollectionViewVisibility()
-            print(self.value)
-            
+            DispatchQueue.main.async {
+                print("111")
+                self.updateCollectionViewVisibility()
+                self.tableSaveContent.reloadData()
+                print(self.news)
+            }
         }
     }
     
@@ -99,7 +101,7 @@ class BookmarksViewController: UIViewController {
         super.viewWillAppear(animated)
         
         updateCollectionViewVisibility()
-        print("VWA--\(self.value)")
+        print("VWA--\(self.news)")
     }
     
     override func viewDidLoad() {
@@ -108,12 +110,12 @@ class BookmarksViewController: UIViewController {
         
         tableSaveContent.delegate = self
         tableSaveContent.dataSource = self
-        print("VDL--\(self.value)")
+        print("VDL--\(self.news)")
 
     }
     
     func updateCollectionViewVisibility() {
-        if value.isEmpty {
+        if news.isEmpty {
             tableSaveContent.isHidden = true
             tableSaveContent.reloadData()
             imageBook.isHidden = false
@@ -184,13 +186,16 @@ class BookmarksViewController: UIViewController {
 extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return value.count
+        print(news.count)
+        return news.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ContentCell", for: indexPath) as? ContentCell else {
             return UITableViewCell()
         }
+        
+        cell.configureBookmarks(news[indexPath.row])
         
         return cell
     }

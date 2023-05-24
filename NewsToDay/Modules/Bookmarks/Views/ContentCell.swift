@@ -24,7 +24,7 @@ class ContentCell: UITableViewCell {
     
     let contentTitle: UILabel = {
         let label = UILabel()
-        label.text = "UI/UX Design"
+        label.text = ""
         label.textColor = .greyPrimary
         label.font = .interRegular14()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +33,7 @@ class ContentCell: UITableViewCell {
     
     let contentSubTitle: UILabel = {
         let label = UILabel()
-        label.text = "A Simple Trick For Creating Color Palettes Quickly"
+        label.text = ""
         label.numberOfLines = 2
         label.textColor = .blackPrimary
         label.font = .interSemiBold16()
@@ -59,6 +59,46 @@ class ContentCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configureBookmarks(_ newsBookmarks: Result) {
+        DispatchQueue.main.async {
+            self.contentSubTitle.text = newsBookmarks.title
+            self.contentTitle.text = newsBookmarks.category
+            
+            switch self.contentTitle.text {
+            case "general":
+                self.contentTitle.text = "🔥 General"
+            case "health":
+                self.contentTitle.text = "🫀 Health"
+            case "business":
+                self.contentTitle.text = "💼 Business"
+            case "technology":
+                self.contentTitle.text = "👨‍💻 Technology"
+            case "science":
+                self.contentTitle.text = "🔬 Science"
+            case "entertainment":
+                self.contentTitle.text = "🎮 Gaming"
+            case "sports":
+                self.contentTitle.text = "🏈 Sports"
+            default: break
+            }
+            
+            DispatchQueue.global().async {
+                guard let imageUrl = newsBookmarks.imageURL else {
+                    DispatchQueue.main.async {
+                        self.contentImage.image = UIImage(named: "noFoto")
+                    }
+                    return
+                }
+                let url = URL(string: imageUrl)
+                if let data = try? Data(contentsOf: url!) {
+                    DispatchQueue.main.async {
+                        self.contentImage.image = UIImage(data: data)
+                    }
+                }
+            }
+        }
     }
     
     
@@ -87,4 +127,3 @@ class ContentCell: UITableViewCell {
         
     }
 }
-
