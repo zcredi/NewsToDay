@@ -15,7 +15,7 @@ class APIManager {
         static let baseURL = "https://newsapi.org/v2/top-headlines"
         static let sources = "sources?"
         static let category = "category="
-        static let apiKey = "cff8c0ee67d64a69a5a99c17c7075c13"
+        static let apiKey = "60dd4d0628da48878cad3163d8a74512"
     }
     
     enum Category: String, CaseIterable {

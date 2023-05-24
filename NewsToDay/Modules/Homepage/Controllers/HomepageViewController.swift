@@ -17,8 +17,6 @@ class HomepageViewController: UIViewController, CollectionDidSelectProtocol {
     
     var searchTableView = UITableView()
     
-    var filteredResults: [Result] = []
-    
     private let titleLabel: UILabel = {
         let view = UILabel()
         view.text = "Browse"
@@ -113,11 +111,6 @@ class HomepageViewController: UIViewController, CollectionDidSelectProtocol {
             searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             
-//            searchTableView.topAnchor.constraint(equalTo: searchBar.topAnchor, constant: 0),
-//            searchTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            searchTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            searchTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
             categoriesCollection.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 25),
             categoriesCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             categoriesCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -172,7 +165,6 @@ class HomepageViewController: UIViewController, CollectionDidSelectProtocol {
                 result.append(resultItem)
             }
             self.middleCollectionView.news = result
-            self.filteredResults = result
         }
     }
     
