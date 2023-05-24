@@ -7,9 +7,18 @@
 
 import UIKit
 
+
+
 class BookmarksViewController: UIViewController {
     
-    private let value: [Any] = []
+    var value: [Result] = [] {
+        didSet {
+            print("111")
+            self.updateCollectionViewVisibility()
+            print(self.value)
+            
+        }
+    }
     
     //MARK: - UI Components
     
@@ -86,21 +95,33 @@ class BookmarksViewController: UIViewController {
     
     //MARK: - viewDidLoad
     
- 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateCollectionViewVisibility()
+        print("VWA--\(self.value)")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         
         tableSaveContent.delegate = self
         tableSaveContent.dataSource = self
-        
+        print("VDL--\(self.value)")
+
+    }
+    
+    func updateCollectionViewVisibility() {
         if value.isEmpty {
             tableSaveContent.isHidden = true
+            tableSaveContent.reloadData()
             imageBook.isHidden = false
             circleView.isHidden = false
             adviceLabel.isHidden = false
         } else {
             tableSaveContent.isHidden = false
+            tableSaveContent.reloadData()
             imageBook.isHidden = true
             circleView.isHidden = true
             adviceLabel.isHidden = true
@@ -159,6 +180,22 @@ class BookmarksViewController: UIViewController {
 
 
 
+
+extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return value.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ContentCell", for: indexPath) as? ContentCell else {
+            return UITableViewCell()
+        }
+        
+        return cell
+    }
+    
+}
 
 
 

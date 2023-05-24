@@ -10,6 +10,7 @@ import SnapKit
 
 class ArticlePageViewController: UIViewController {
     
+    
     // MARK: - let/var
     let articleView = ArticleView()
     
@@ -42,11 +43,12 @@ class ArticlePageViewController: UIViewController {
                 }
             }
         }
-        
         articleView.nameAutor.text = newsItem.author
         articleView.themeNewsLabel.text = newsItem.category
         articleView.titleLabel.text = newsItem.title
         articleView.textLabel.text = newsItem.description
+        articleView.result = newsItem
+        articleView.updateLikeButtonState()
     }
     
     func setupDataRecommend(recommendNews: Recommend) {

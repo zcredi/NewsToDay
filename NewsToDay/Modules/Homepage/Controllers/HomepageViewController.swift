@@ -48,6 +48,7 @@ class HomepageViewController: UIViewController, CollectionDidSelectProtocol {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        middleCollectionView.collectionView.reloadData()
     }
     
     override func viewDidLoad() {

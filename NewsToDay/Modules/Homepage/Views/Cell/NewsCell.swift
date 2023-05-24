@@ -7,9 +7,22 @@
 
 import UIKit
 
+extension UserDefaults {
+    func saveLikeState(_ isLiked: Bool, for searchToken: String) {
+        set(isLiked, forKey: searchToken)
+    }
+
+    func getLikeState(for searchToken: String) -> Bool {
+        return bool(forKey: searchToken)
+    }
+}
+
 class NewsCell: UICollectionViewCell {
     
-    
+    private var isLiked: Bool = false
+    var result: Result!
+    var bookmarksViewController = BookmarksViewController()
+
     static let identifier = "NewsCell"
     
     override init(frame: CGRect) {
@@ -64,9 +77,7 @@ class NewsCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    var liked: Bool = false
-    
+        
     lazy var favouriteButton: UIButton = {
         let view = UIButton()
         view.tintColor = .white
@@ -77,19 +88,24 @@ class NewsCell: UICollectionViewCell {
     }()
     
     @objc func favouriteButtonPressed() {
-        if liked {
-            favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
-            liked = false
+        isLiked.toggle()
+        let imageName = isLiked ? "bookmark.fill" : "bookmark"
+        favouriteButton.setImage(UIImage(systemName: imageName), for: .normal)
+        UserDefaults.standard.saveLikeState(isLiked, for: result.title!)
+        
+        if isLiked {
+            bookmarksViewController.value.append(result)
+            bookmarksViewController.updateCollectionViewVisibility()
         } else {
-            favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
-            liked = true
+            bookmarksViewController.value.removeAll { $0.title == result.title }
         }
     }
     
     func configureCell(_ newsData: Result) {
         DispatchQueue.main.async {
-            self.titleLabel.text = newsData.title
-            self.categoryLabel.text = newsData.category
+            self.result = newsData
+            self.titleLabel.text = self.result.title
+            self.categoryLabel.text = self.result.category
             
             switch self.categoryLabel.text {
             case "general":
@@ -111,7 +127,7 @@ class NewsCell: UICollectionViewCell {
             }
             
             DispatchQueue.global().async {
-                guard let imageUrl = newsData.imageURL else {
+                guard let imageUrl = self.result.imageURL else {
                     DispatchQueue.main.async {
                         self.newsImageView.image = UIImage(named: "noFoto")
                     }
@@ -124,7 +140,16 @@ class NewsCell: UICollectionViewCell {
                     }
                 }
             }
+            self.updateLikeButtonState()
+
         }
+    }
+    
+    private func updateLikeButtonState() {
+        let isLiked = UserDefaults.standard.getLikeState(for: result.title!)
+        self.isLiked = isLiked
+        let imageName = isLiked ? "bookmark.fill" : "bookmark"
+        favouriteButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
     
     private func setupViews() {
